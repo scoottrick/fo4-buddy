@@ -1,11 +1,19 @@
 import { Component, OnInit, inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable, map } from "rxjs";
+import { BobbleheadService } from "./bobbleheads/data-access/bobblehead.service";
+import { MagazineService } from "./magazines/data-access/magazine.service";
 
 @Component({
   selector: "fo-root",
   template: `
-    <div class="font-bold">
+    <nav class="font-bold">
+      <ul>
+        <li>Bobbleheads</li>
+        <li>Magazines</li>
+        <li>Hacking</li>
+      </ul>
+    </nav>
+    <div>
       <ul *ngIf="bobbleheads$ | async as bobbles">
         <li *ngFor="let bobble of bobbles">
           {{ bobble.name }}
@@ -22,37 +30,14 @@ import { Observable, map } from "rxjs";
 })
 export class AppComponent implements OnInit {
   http = inject(HttpClient);
+  bobbleheadService = inject(BobbleheadService);
+  magazineService = inject(MagazineService);
 
-  bobbleheads$ = this.http.get<BobbleheadObject[]>(
-    "assets/data/bobbleheads.json"
-  );
-  magazines$ = this.http.get<MagazineObject[]>("assets/data/magazines.json");
+  bobbleheads$ = this.bobbleheadService.bobbleheads$;
+  magazines$ = this.magazineService.magazines$;
 
-  ngOnInit(): void {}
-}
-
-interface BobbleheadObject {
-  id: number;
-  name: string;
-  url: string;
-  location: LocationObject;
-}
-
-interface LocationObject {
-  name: string;
-  url: string;
-}
-
-interface MagazineObject {
-  id: number;
-  title: string;
-  url: string;
-  issues: MagazineIssueObject[];
-}
-
-interface MagazineIssueObject {
-  id: number;
-  title: string;
-  effect: string;
-  location: LocationObject;
+  ngOnInit(): void {
+    this.bobbleheadService.fetchData();
+    this.magazineService.fetchData();
+  }
 }
