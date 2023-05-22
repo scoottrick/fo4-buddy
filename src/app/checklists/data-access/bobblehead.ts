@@ -4,5 +4,6 @@ export interface BobbleheadObject {
   id: number;
   name: string;
   url: string;
+  image: string;
   location: LocationObject;
 }

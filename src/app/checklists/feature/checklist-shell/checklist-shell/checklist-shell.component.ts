@@ -5,9 +5,12 @@ import { MagazineService } from "../../../data-access/magazine.service";
 @Component({
   selector: "fo-checklist-shell",
   template: `<div>
-    <div>
-      <a routerLink="/checklists/bobbleheads">Bobbleheads</a
-      ><a routerLink="/checklists/magazines">Magazines</a>
+    <div class="h-10 bg-blue-500 flex flex-row">
+      <a class="grow text-center" routerLink="/checklists/bobbleheads"
+        >Bobbleheads</a
+      ><a class="grow text-center" routerLink="/checklists/magazines"
+        >Magazines</a
+      >
     </div>
     <router-outlet></router-outlet>
   </div> `,

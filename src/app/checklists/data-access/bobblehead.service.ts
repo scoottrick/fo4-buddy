@@ -9,6 +9,7 @@ import { BobbleheadObject } from "./bobblehead";
 export class BobbleheadService {
   private http = inject(HttpClient);
 
+  private collectedBobbleheads: number[] = [];
   private bobbleheadSubject = new BehaviorSubject<BobbleheadObject[]>([]);
   public bobbleheads$ = this.bobbleheadSubject.asObservable();
 
@@ -18,5 +19,18 @@ export class BobbleheadService {
     request$.subscribe((bobbleheadData) => {
       this.bobbleheadSubject.next(bobbleheadData);
     });
+  }
+
+  public isCollected(bobblehead: BobbleheadObject) {
+    return this.collectedBobbleheads.indexOf(bobblehead.id) >= 0;
+  }
+
+  public toggleFromCollection(bobblehead: BobbleheadObject) {
+    const index = this.collectedBobbleheads.indexOf(bobblehead.id);
+    if (index < 0) {
+      this.collectedBobbleheads.push(bobblehead.id);
+    } else {
+      this.collectedBobbleheads.splice(index, 1);
+    }
   }
 }

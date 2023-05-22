@@ -6,6 +6,7 @@ import { RouterModule } from "@angular/router";
 import { ChecklistShellComponent } from "./feature/checklist-shell/checklist-shell/checklist-shell.component";
 import { BobbleheadChecklistComponent } from "./feature/bobblehead-checklist/bobblehead-checklist.component";
 import { MagazineChecklistComponent } from "./feature/magazine-checklist/magazine-checklist.component";
+import { CheckboxItemModule } from "../_shared/ui/checkbox-item/checkbox-item.module";
 
 @NgModule({
   declarations: [
@@ -13,6 +14,6 @@ import { MagazineChecklistComponent } from "./feature/magazine-checklist/magazin
     BobbleheadChecklistComponent,
     MagazineChecklistComponent,
   ],
-  imports: [CommonModule, RouterModule, HttpClientModule],
+  imports: [CommonModule, RouterModule, HttpClientModule, CheckboxItemModule],
 })
 export class ChecklistsModule {}
