@@ -9,14 +9,27 @@ import { TerminalHackingComponent } from "./hacking/feature/terminal-hacking/ter
 const routes: Routes = [
   {
     path: "checklists",
+    title: "Collections",
     component: ChecklistShellComponent,
     children: [
-      { path: "bobbleheads", component: BobbleheadChecklistComponent },
-      { path: "magazines", component: MagazineChecklistComponent },
+      {
+        path: "bobbleheads",
+        title: "Bobbleheads",
+        component: BobbleheadChecklistComponent,
+      },
+      {
+        path: "magazines",
+        title: "Magazines",
+        component: MagazineChecklistComponent,
+      },
       { path: "**", redirectTo: "/checklists/bobbleheads" },
     ],
   },
-  { path: "hacking", component: TerminalHackingComponent },
+  {
+    path: "hacking",
+    title: "Terminal Hacking",
+    component: TerminalHackingComponent,
+  },
   { path: "**", redirectTo: "/checklists" },
 ];
 

@@ -12,7 +12,7 @@ import { Component } from "@angular/core";
         <nav>
           <ul class="flex flex-row justify-between gap-4">
             <li class="flex-1 text-center">
-              <a routerLink="/checklists">Checklists</a>
+              <a routerLink="/checklists">Collections</a>
             </li>
             <li class="flex-1 text-center">
               <a routerLink="/hacking">Hacking</a>
