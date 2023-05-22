@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
-import { MagazineObject } from "src/app/magazines/data-access/magazine";
+import { MagazineObject } from "./magazine";
 
 @Injectable({
   providedIn: "root",

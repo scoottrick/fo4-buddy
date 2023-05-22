@@ -1,29 +1,17 @@
 import { Component, OnInit, inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { BobbleheadService } from "./bobbleheads/data-access/bobblehead.service";
-import { MagazineService } from "./magazines/data-access/magazine.service";
+import { BobbleheadService } from "./checklists/data-access/bobblehead.service";
+import { MagazineService } from "./checklists/data-access/magazine.service";
 
 @Component({
   selector: "fo-root",
   template: `
     <nav class="font-bold">
       <ul>
-        <li>Bobbleheads</li>
-        <li>Magazines</li>
-        <li>Hacking</li>
+        <li><a routerLink="/checklists">Checklists</a></li>
+        <li><a routerLink="/hacking">Hacking</a></li>
       </ul>
     </nav>
-    <div>
-      <ul *ngIf="bobbleheads$ | async as bobbles">
-        <li *ngFor="let bobble of bobbles">
-          {{ bobble.name }}
-        </li>
-      </ul>
-      <hr />
-      <ul *ngIf="magazines$ | async as mags">
-        <li *ngFor="let mag of mags">{{ mag.title }}</li>
-      </ul>
-    </div>
     <router-outlet></router-outlet>
   `,
   styles: [],

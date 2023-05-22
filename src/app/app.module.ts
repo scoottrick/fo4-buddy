@@ -2,21 +2,13 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 
 import { AppRoutingModule } from "./app-routing.module";
-import { HttpClientModule } from "@angular/common/http";
 import { AppComponent } from "./app.component";
-import { BobbleheadChecklistComponent } from "./bobbleheads/feature/bobblehead-checklist/bobblehead-checklist.component";
-import { BobbleheadService } from "./bobbleheads/data-access/bobblehead.service";
-import { MagazineChecklistComponent } from "./magazines/feature/magazine-checklist/magazine-checklist.component";
-import { MagazineService } from "./magazines/data-access/magazine.service";
+import { HackingModule } from "./hacking/hacking.module";
+import { ChecklistsModule } from "./checklists/checklists.module";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    BobbleheadChecklistComponent,
-    MagazineChecklistComponent,
-  ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
-  providers: [BobbleheadService, MagazineService],
+  declarations: [AppComponent],
+  imports: [BrowserModule, AppRoutingModule, ChecklistsModule, HackingModule],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

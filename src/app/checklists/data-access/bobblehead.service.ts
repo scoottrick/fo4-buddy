@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
-import { BobbleheadObject } from "src/app/bobbleheads/data-access/bobblehead";
+import { BobbleheadObject } from "./bobblehead";
 
 @Injectable({
   providedIn: "root",
