@@ -3,7 +3,9 @@ import { Component } from "@angular/core";
 @Component({
   selector: "fo-root",
   template: `
-    <main class="fixed top-0 bottom-0 left-0 right-0 flex flex-col">
+    <main
+      class="fixed top-0 bottom-0 left-0 right-0 flex flex-col bg-stone-700"
+    >
       <section class="flex-grow overflow-y-scroll">
         <router-outlet></router-outlet>
       </section>

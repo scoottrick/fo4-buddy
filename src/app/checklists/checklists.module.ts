@@ -7,12 +7,14 @@ import { ChecklistShellComponent } from "./feature/checklist-shell/checklist-she
 import { BobbleheadChecklistComponent } from "./feature/bobblehead-checklist/bobblehead-checklist.component";
 import { MagazineChecklistComponent } from "./feature/magazine-checklist/magazine-checklist.component";
 import { CheckboxItemModule } from "../_shared/ui/checkbox-item/checkbox-item.module";
+import { MagazineListItemComponent } from "./feature/magazine-checklist/magazine-list-item.component";
 
 @NgModule({
   declarations: [
     ChecklistShellComponent,
     BobbleheadChecklistComponent,
     MagazineChecklistComponent,
+    MagazineListItemComponent,
   ],
   imports: [CommonModule, RouterModule, HttpClientModule, CheckboxItemModule],
 })
