@@ -3,7 +3,7 @@ import { Component } from "@angular/core";
 @Component({
   selector: "fo-root",
   template: `
-    <main class="bg-stone-700 fixed top-0 bottom-0 left-0 right-0">
+    <main class="mat-app-background fixed top-0 bottom-0 left-0 right-0">
       <router-outlet></router-outlet>
 
       <!-- <section class="flex-none h-16 bg-slate-700 text-white">
