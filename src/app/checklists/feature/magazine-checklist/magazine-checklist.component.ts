@@ -6,7 +6,7 @@ import { MagazineService } from "../../data-access/magazine.service";
   selector: "fo-magazine-checklist",
   template: `
     <ul>
-      <li class="m-4" *ngFor="let magazine of magazines$ | async">
+      <li class="m-2" *ngFor="let magazine of magazines$ | async">
         <fo-magazine-list-item [magazine]="magazine"></fo-magazine-list-item>
       </li>
     </ul>
