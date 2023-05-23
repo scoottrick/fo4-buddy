@@ -5,10 +5,17 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { HackingModule } from "./hacking/hacking.module";
 import { ChecklistsModule } from "./checklists/checklists.module";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, ChecklistsModule, HackingModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ChecklistsModule,
+    HackingModule,
+    BrowserAnimationsModule,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
