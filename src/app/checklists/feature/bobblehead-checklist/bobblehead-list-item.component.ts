@@ -1,69 +1,49 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { BobbleheadObject } from "../../data-access/bobblehead";
-import { CommonModule } from "@angular/common";
-
-@Component({
-  selector: "fo-text-link",
-  standalone: true,
-  imports: [CommonModule],
-  template: `<a [href]="href" class="underline text-green-500"
-    ><ng-content></ng-content
-  ></a>`,
-})
-export class TextLinkComponent {
-  @Input() href: string = "";
-}
 
 @Component({
   selector: "fo-bobblehead-list-item",
-  template: `<ng-container *ngIf="bobblehead">
-    <fo-card>
-      <div class="flex flex-row">
-        <div class="flex-grow" (click)="expanded = true">
-          <h2 class="text-lg">
-            {{ bobblehead.name }}
-          </h2>
+  template: `
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon *ngIf="collected" class="mr-2" fontIcon="done"></mat-icon>
+          {{ bobblehead?.name }}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="mb-2">
+        <div>
+          <a mat-button color="accent" [href]="bobblehead?.url">More Info</a>
         </div>
-        <button (click)="toggleCollected.emit()">
-          {{ collected ? "X" : "C" }}
+        <div>
+          Location:
+          <a mat-button color="accent" [href]="bobblehead?.location?.url">{{
+            bobblehead?.location?.name
+          }}</a>
+        </div>
+        <div>Effect: {{ bobblehead?.effect }}</div>
+      </div>
+
+      <ng-container *ngIf="!collected">
+        <button
+          mat-stroked-button
+          color="accent"
+          (click)="toggleCollected.emit()"
+        >
+          Collect
         </button>
-      </div>
-      <div *ngIf="expanded" class="text-sm mt-4 mb-2">
-        <p>
-          <fo-text-link [href]="bobblehead.url">Wiki Page</fo-text-link>
-        </p>
-        <p>
-          <span class="text-gray-300">Location: </span
-          ><fo-text-link [href]="bobblehead.location.url">{{
-            bobblehead.location.name
-          }}</fo-text-link>
-        </p>
-        <p>
-          <span class="text-gray-300">Effect: </span>{{ bobblehead.effect }}
-        </p>
-        <div class="mt-2">
-          <button
-            class="border border-green-500 text-green-500 px-4 py-1 rounded text-sm"
-            (click)="expanded = false"
-          >
-            {{ expanded ? "close" : "info" }}
-          </button>
-        </div>
-      </div>
-    </fo-card>
-  </ng-container>`,
+      </ng-container>
+      <ng-container *ngIf="collected">
+        <button mat-flat-button color="accent" (click)="toggleCollected.emit()">
+          Collected
+        </button>
+      </ng-container>
+    </mat-expansion-panel>
+  `,
 })
 export class BobbleheadListItem {
   @Input() collected: boolean = false;
   @Input() bobblehead?: BobbleheadObject;
   @Output() toggleCollected = new EventEmitter<void>();
   expanded = false;
-
-  isCollected(b: BobbleheadObject) {
-    return false;
-  }
-
-  toggleBobblehead(b: BobbleheadObject) {
-    return;
-  }
 }
