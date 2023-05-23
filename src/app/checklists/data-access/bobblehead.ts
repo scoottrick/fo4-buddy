@@ -6,4 +6,5 @@ export interface BobbleheadObject {
   url: string;
   image: string;
   location: LocationObject;
+  effect: string;
 }

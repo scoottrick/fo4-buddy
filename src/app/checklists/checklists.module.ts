@@ -8,12 +8,17 @@ import { BobbleheadChecklistComponent } from "./feature/bobblehead-checklist/bob
 import { MagazineChecklistComponent } from "./feature/magazine-checklist/magazine-checklist.component";
 import { CheckboxItemModule } from "../_shared/ui/checkbox-item/checkbox-item.module";
 import { MagazineListItemComponent } from "./feature/magazine-checklist/magazine-list-item.component";
+import {
+  BobbleheadListItem,
+  TextLinkComponent,
+} from "./feature/bobblehead-checklist/bobblehead-list-item.component";
 import { CardComponent } from "../_shared/ui/card/card.component";
 
 @NgModule({
   declarations: [
     ChecklistShellComponent,
     BobbleheadChecklistComponent,
+    BobbleheadListItem,
     MagazineChecklistComponent,
     MagazineListItemComponent,
   ],
@@ -23,6 +28,7 @@ import { CardComponent } from "../_shared/ui/card/card.component";
     HttpClientModule,
     CheckboxItemModule,
     CardComponent,
+    TextLinkComponent,
   ],
 })
 export class ChecklistsModule {}

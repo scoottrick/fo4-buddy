@@ -5,28 +5,15 @@ import { BobbleheadObject } from "../../data-access/bobblehead";
 @Component({
   selector: "fo-bobblehead-checklist",
   template: ` <div class="p-4">
-    <fo-card>
-      <ul *ngIf="bobbleheads$ | async as bobbleheads">
-        <li class="mb-2" *ngFor="let b of bobbleheads">
-          <div>
-            <fo-checkbox-item
-              [checked]="isCollected(b)"
-              (toggle)="toggleBobblehead(b)"
-            >
-              <span class="block text-lg">
-                {{ b.name }}
-              </span>
-              <span class="block text-sm">
-                {{ b.location.name }}
-              </span>
-            </fo-checkbox-item>
-          </div>
-          <div class="p-1 bg-slate-400 text-white">
-            <button class="text-xs">INFO</button>
-          </div>
-        </li>
-      </ul>
-    </fo-card>
+    <ul *ngIf="bobbleheads$ | async as bobbleheads">
+      <li class="mb-2" *ngFor="let b of bobbleheads">
+        <fo-bobblehead-list-item
+          [bobblehead]="b"
+          [collected]="isCollected(b)"
+          (toggleCollected)="toggleBobblehead(b)"
+        ></fo-bobblehead-list-item>
+      </li>
+    </ul>
   </div>`,
   styles: [],
 })
