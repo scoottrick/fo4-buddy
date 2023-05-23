@@ -4,17 +4,27 @@ import { MagazineService } from "../../../data-access/magazine.service";
 
 @Component({
   selector: "fo-checklist-shell",
-  template: `<div>
-    <div class="h-10 bg-blue-500 flex flex-row">
-      <a class="grow text-center" routerLink="/checklists/bobbleheads"
-        >Bobbleheads</a
-      ><a class="grow text-center" routerLink="/checklists/magazines"
-        >Magazines</a
-      >
-    </div>
-    <router-outlet></router-outlet>
-  </div> `,
-  styles: [],
+  template: `<mat-tab-group
+    class="h-full w-full"
+    backgroundColor="primary"
+    headerPosition="below"
+  >
+    <mat-tab label="Bobbleheads">
+      <fo-bobblehead-checklist></fo-bobblehead-checklist>
+    </mat-tab>
+    <mat-tab label="Magazines">
+      <fo-magazine-checklist></fo-magazine-checklist>
+    </mat-tab>
+  </mat-tab-group>`,
+  styles: [
+    `
+      :host {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+    `,
+  ],
 })
 export class ChecklistShellComponent implements OnInit {
   private bobbleheadService = inject(BobbleheadService);

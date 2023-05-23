@@ -3,14 +3,10 @@ import { Component } from "@angular/core";
 @Component({
   selector: "fo-root",
   template: `
-    <main
-      class="fixed top-0 bottom-0 left-0 right-0 flex flex-col bg-stone-700"
-    >
-      <section class="flex-grow overflow-y-scroll">
-        <router-outlet></router-outlet>
-      </section>
+    <main class="bg-stone-700 fixed top-0 bottom-0 left-0 right-0">
+      <router-outlet></router-outlet>
 
-      <section class="flex-none h-16 bg-slate-700 text-white">
+      <!-- <section class="flex-none h-16 bg-slate-700 text-white">
         <nav>
           <ul class="flex flex-row justify-between gap-4">
             <li class="flex-1 text-center">
@@ -21,7 +17,7 @@ import { Component } from "@angular/core";
             </li>
           </ul>
         </nav>
-      </section>
+      </section> -->
     </main>
   `,
   styles: [],
