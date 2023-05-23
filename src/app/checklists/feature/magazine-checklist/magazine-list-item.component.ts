@@ -5,9 +5,7 @@ import { MagazineObject } from "../../data-access/magazine";
   selector: "fo-magazine-list-item",
   template: `
     <ng-container *ngIf="magazine">
-      <div
-        class="bg-stone-800 rounded-md text-gray-100 p-4 flex flex-col justify-between gap-4"
-      >
+      <fo-card class="flex flex-col justify-between gap-4">
         <div class="relative" (click)="expanded = !expanded">
           <h5
             class="font-bold text-lg w-full overflow-hidden text-ellipsis whitespace-nowrap"
@@ -40,7 +38,7 @@ import { MagazineObject } from "../../data-access/magazine";
             </li>
           </ul>
         </ng-container>
-      </div>
+      </fo-card>
     </ng-container>
   `,
   styles: [],
