@@ -1,5 +1,6 @@
-import { Component, Input } from "@angular/core";
-import { MagazineObject } from "../../data-access/magazine";
+import { Component, EventEmitter, Input, Output, inject } from "@angular/core";
+import { MagazineIssueId, MagazineObject } from "../../data-access/magazine";
+import { MagazineService } from "../../data-access/magazine.service";
 
 @Component({
   selector: "fo-magazine-list-item",
@@ -16,7 +17,11 @@ import { MagazineObject } from "../../data-access/magazine";
           <ng-container>
             <ul>
               <li *ngFor="let issue of magazine.issues">
-                <fo-issue-list-item [issue]="issue"></fo-issue-list-item>
+                <fo-issue-list-item
+                  [issue]="issue"
+                  [collected]="collectedIssues?.has(issue.id) || false"
+                  (toggle)="toggleCollectedIssue.emit(issue.id)"
+                ></fo-issue-list-item>
               </li>
             </ul>
             <p>Collected: 0 | Remaining: {{ magazine.issues.length }}</p>
@@ -29,5 +34,6 @@ import { MagazineObject } from "../../data-access/magazine";
 })
 export class MagazineListItemComponent {
   @Input() magazine?: MagazineObject;
-  expanded = false;
+  @Input() collectedIssues?: Set<MagazineIssueId>;
+  @Output() toggleCollectedIssue = new EventEmitter<MagazineIssueId>();
 }

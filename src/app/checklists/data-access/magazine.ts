@@ -1,5 +1,8 @@
 import { LocationObject } from "../../_shared/data-access/location";
 
+export type MagazineId = number;
+export type MagazineIssueId = number;
+
 export interface MagazineObject {
   id: number;
   title: string;
