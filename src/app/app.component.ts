@@ -9,7 +9,20 @@ import { ActivatedRoute, Router } from "@angular/router";
     >
       <header>
         <mat-toolbar color="primary">
-          <mat-toolbar-row>Collections</mat-toolbar-row>
+          <mat-toolbar-row class="flex flex-row">
+            <span class="grow">Collections</span>
+            <nav>
+              <button mat-icon-button routerLink="/hacking">
+                <mat-icon fontIcon="terminal"></mat-icon>
+              </button>
+              <button mat-icon-button routerLink="/checklists">
+                <mat-icon fontIcon="checklist"></mat-icon>
+              </button>
+              <button mat-icon-button>
+                <mat-icon fontIcon="settings"></mat-icon>
+              </button>
+            </nav>
+          </mat-toolbar-row>
         </mat-toolbar>
       </header>
       <section class="flex flex-col grow overflow-hidden">
