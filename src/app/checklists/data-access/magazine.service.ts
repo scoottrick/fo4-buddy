@@ -26,7 +26,7 @@ export class MagazineService {
     });
   }
 
-  public toggleCollectedIssue(
+  public toggleIssueFromCollection(
     magazineId: MagazineId,
     issueId: MagazineIssueId
   ) {

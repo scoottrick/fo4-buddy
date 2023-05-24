@@ -6,9 +6,9 @@ import { Observable, combineLatest, of } from "rxjs";
 
 @Component({
   selector: "fo-magazine-checklist",
-  template: `
-    <ul *ngIf="vm$ | async as vm">
-      <li class="m-2" *ngFor="let magazine of vm.magazines">
+  template: `<ng-container *ngIf="vm$ | async as vm">
+    <ul class="p-4">
+      <li class="mb-2" *ngFor="let magazine of vm.magazines">
         <fo-magazine-list-item
           [magazine]="magazine"
           [collectedIssues]="vm.magazineCollection.get(magazine.id)"
@@ -16,7 +16,7 @@ import { Observable, combineLatest, of } from "rxjs";
         ></fo-magazine-list-item>
       </li>
     </ul>
-  `,
+  </ng-container>`,
   styles: [],
 })
 export class MagazineChecklistComponent {
@@ -24,16 +24,10 @@ export class MagazineChecklistComponent {
 
   vm$ = combineLatest({
     magazines: this.magazineService.magazines$,
-    magazineCollection: this.magazineService.magazineCollection$.pipe(
-      tap((collection) => {
-        console.log("magazine collection updated");
-        console.log(collection);
-      })
-    ),
+    magazineCollection: this.magazineService.magazineCollection$,
   });
 
   toggleIssue(magazineId: MagazineId, issueId: MagazineIssueId) {
-    console.log("toggle issue");
-    this.magazineService.toggleCollectedIssue(magazineId, issueId);
+    this.magazineService.toggleIssueFromCollection(magazineId, issueId);
   }
 }

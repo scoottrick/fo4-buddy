@@ -1,30 +1,30 @@
 import { Component, inject } from "@angular/core";
 import { BobbleheadService } from "../../data-access/bobblehead.service";
 import { BobbleheadObject } from "../../data-access/bobblehead";
+import { combineLatest } from "rxjs";
 
 @Component({
   selector: "fo-bobblehead-checklist",
-  template: ` <div class="p-4">
-    <ul *ngIf="bobbleheads$ | async as bobbleheads">
-      <li class="mb-2" *ngFor="let b of bobbleheads">
+  template: ` <ng-container *ngIf="vm$ | async as vm">
+    <ul class="p-4">
+      <li class="mb-2" *ngFor="let b of vm.bobbleheads">
         <fo-bobblehead-list-item
           [bobblehead]="b"
-          [collected]="isCollected(b)"
+          [collected]="vm.bobbleheadCollection.has(b.id)"
           (toggleCollected)="toggleBobblehead(b)"
         ></fo-bobblehead-list-item>
       </li>
     </ul>
-  </div>`,
+  </ng-container>`,
   styles: [],
 })
 export class BobbleheadChecklistComponent {
   private bobbleheadService = inject(BobbleheadService);
 
-  bobbleheads$ = this.bobbleheadService.bobbleheads$;
-
-  isCollected(b: BobbleheadObject) {
-    return this.bobbleheadService.isCollected(b);
-  }
+  vm$ = combineLatest({
+    bobbleheads: this.bobbleheadService.bobbleheads$,
+    bobbleheadCollection: this.bobbleheadService.bobbleheadCollection$,
+  });
 
   toggleBobblehead(b: BobbleheadObject) {
     this.bobbleheadService.toggleFromCollection(b);

@@ -1,5 +1,7 @@
 import { LocationObject } from "../../_shared/data-access/location";
 
+export type BobbleheadId = number;
+
 export interface BobbleheadObject {
   id: number;
   name: string;
