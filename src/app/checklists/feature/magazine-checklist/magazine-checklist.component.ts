@@ -1,8 +1,8 @@
-import { Component, inject } from "@angular/core";
-import { map, startWith, tap } from "rxjs/operators";
+import { Component, OnInit, inject } from "@angular/core";
+import { combineLatest } from "rxjs";
+
 import { MagazineService } from "../../data-access/magazine.service";
 import { MagazineId, MagazineIssueId } from "../../data-access/magazine";
-import { Observable, combineLatest, of } from "rxjs";
 
 @Component({
   selector: "fo-magazine-checklist",
@@ -12,14 +12,14 @@ import { Observable, combineLatest, of } from "rxjs";
         <fo-magazine-list-item
           [magazine]="magazine"
           [collectedIssues]="vm.magazineCollection.get(magazine.id)"
-          (toggleCollectedIssue)="toggleIssue(magazine.id, $event)"
+          (toggleCollectedIssue)="toggleMagazineIssue(magazine.id, $event)"
         ></fo-magazine-list-item>
       </li>
     </ul>
   </ng-container>`,
   styles: [],
 })
-export class MagazineChecklistComponent {
+export class MagazineChecklistComponent implements OnInit {
   private magazineService = inject(MagazineService);
 
   vm$ = combineLatest({
@@ -27,7 +27,11 @@ export class MagazineChecklistComponent {
     magazineCollection: this.magazineService.magazineCollection$,
   });
 
-  toggleIssue(magazineId: MagazineId, issueId: MagazineIssueId) {
+  ngOnInit(): void {
+    this.magazineService.fetchData();
+  }
+
+  toggleMagazineIssue(magazineId: MagazineId, issueId: MagazineIssueId) {
     this.magazineService.toggleIssueFromCollection(magazineId, issueId);
   }
 }

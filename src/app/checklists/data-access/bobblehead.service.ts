@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
+
 import { BobbleheadId, BobbleheadObject } from "./bobblehead";
 
 @Injectable({
@@ -46,12 +47,12 @@ export class BobbleheadService {
     this.bobbleheadCollectionSubject.next(this.bobbleheadCollection);
   }
 
-  public toggleFromCollection(bobblehead: BobbleheadObject) {
-    const isCollected = this.bobbleheadCollection.has(bobblehead.id);
+  public toggleFromCollection(bobbleheadId: BobbleheadId) {
+    const isCollected = this.bobbleheadCollection.has(bobbleheadId);
     if (isCollected) {
-      this.bobbleheadCollection.delete(bobblehead.id);
+      this.bobbleheadCollection.delete(bobbleheadId);
     } else {
-      this.bobbleheadCollection.add(bobblehead.id);
+      this.bobbleheadCollection.add(bobbleheadId);
     }
     this.bobbleheadCollectionSubject.next(this.bobbleheadCollection);
   }
