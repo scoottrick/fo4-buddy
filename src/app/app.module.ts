@@ -6,6 +6,7 @@ import { AppComponent } from "./app.component";
 import { HackingModule } from "./hacking/hacking.module";
 import { ChecklistsModule } from "./checklists/checklists.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { MatToolbarModule } from "@angular/material/toolbar";
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,6 +16,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     ChecklistsModule,
     HackingModule,
     BrowserAnimationsModule,
+    MatToolbarModule,
   ],
   bootstrap: [AppComponent],
 })
