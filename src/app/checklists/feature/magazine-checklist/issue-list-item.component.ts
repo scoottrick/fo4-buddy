@@ -4,12 +4,16 @@ import { MagazineIssueObject } from "../../data-access/magazine";
 @Component({
   selector: "fo-issue-list-item",
   template: `
-    <div>
-      {{ issue?.title }}
-    </div>
-    <div>
-      {{ issue?.location?.name }}
-    </div>
+    <mat-checkbox>
+      <div>
+        <div>
+          {{ issue?.title }}
+        </div>
+        <div>
+          {{ issue?.location?.name }}
+        </div>
+      </div>
+    </mat-checkbox>
   `,
 })
 export class IssueListItemComponent {
