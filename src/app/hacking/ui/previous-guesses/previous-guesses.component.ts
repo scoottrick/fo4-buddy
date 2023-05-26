@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { TerminalGuess } from "../../data-access/terminal-guess";
 
 @Component({
   selector: "fo-previous-guesses",
@@ -6,10 +7,10 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
   styles: [],
 })
 export class PreviousGuessesComponent {
-  @Input() guesses?: { word: string; likeness: number }[];
+  @Input() guesses?: TerminalGuess[];
   @Output() guessDeleted = new EventEmitter<string>();
 
-  handleDeleteClick(guess: { word: string; likeness: number }) {
+  handleDeleteClick(guess: TerminalGuess) {
     this.guessDeleted.emit(guess.word);
   }
 }

@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
-import { Observable, combineLatest, map, of } from "rxjs";
+import { combineLatest, map, of } from "rxjs";
+import { TerminalGuess } from "../../data-access/terminal-guess";
 
 const samplePasswords = [
   "takes",
@@ -70,15 +71,14 @@ const samplePasswords = [
 export class TerminalHackingComponent {
   private passwords$ = of(samplePasswords);
   private activeGuess$ = this.passwords$.pipe(map((passwords) => passwords[1]));
-  private previousGuesses$: Observable<{ word: string; likeness: number }[]> =
-    this.passwords$.pipe(
-      map((passwords) => {
-        return [
-          { word: passwords[0], likeness: 3 },
-          { word: passwords[1], likeness: 1 },
-        ];
-      })
-    );
+  private previousGuesses$ = this.passwords$.pipe(
+    map((passwords) => {
+      return <TerminalGuess[]>[
+        { word: passwords[0], likeness: 3 },
+        { word: passwords[1], likeness: 1 },
+      ];
+    })
+  );
 
   vm$ = combineLatest({
     passwords: this.passwords$,
