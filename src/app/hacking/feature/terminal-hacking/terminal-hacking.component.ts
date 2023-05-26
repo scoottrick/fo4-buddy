@@ -37,17 +37,10 @@ const samplePasswords = [
         <fo-new-passwords (wordsAdded)="addNewWords($event)"></fo-new-passwords>
 
         <!-- guess chips -->
-        <ng-container>
-          <div class="py-4">
-            <mat-chip-listbox>
-              <ng-container *ngFor="let word of vm.passwords">
-                <mat-chip-option color="accent" class="font-mono">
-                  {{ word }}
-                </mat-chip-option>
-              </ng-container>
-            </mat-chip-listbox>
-          </div>
-        </ng-container>
+        <fo-guess-picker
+          [passwords]="vm.passwords"
+          (wordChanged)="changeActiveGuess($event)"
+        ></fo-guess-picker>
 
         <!-- guess maker -->
         <ng-container>
@@ -98,20 +91,10 @@ const samplePasswords = [
   `,
   styles: [
     `
-      ::ng-deep .mdc-evolution-chip-set__chips {
-        justify-content: space-evenly;
-        row-gap: 1em;
-      }
-
       .guess ::ng-deep .mat-mdc-form-field-infix {
         width: auto;
         min-width: 12em;
         text-align: center;
-      }
-
-      .font-mono {
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-          "Liberation Mono", "Courier New", monospace;
       }
 
       .guess h1 {
@@ -141,6 +124,10 @@ export class TerminalHackingComponent {
 
   addNewWords(words: string[]) {
     console.log("new words", words);
+  }
+
+  changeActiveGuess(word: string) {
+    console.log("guess:", word);
   }
 
   menuAction() {

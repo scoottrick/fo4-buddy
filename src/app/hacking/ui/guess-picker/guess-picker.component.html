@@ -1,0 +1,11 @@
+<ng-container *ngIf="passwords">
+  <div class="py-4">
+    <mat-chip-listbox [value]="selectedWord" (change)="handleChange($event)">
+      <ng-container *ngFor="let word of passwords; let i = index">
+        <mat-chip-option color="accent" class="font-mono">
+          {{ word }}
+        </mat-chip-option>
+      </ng-container>
+    </mat-chip-listbox>
+  </div>
+</ng-container>
