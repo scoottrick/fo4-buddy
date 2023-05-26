@@ -23,10 +23,20 @@ const samplePasswords = [
   selector: "fo-terminal-hacking",
   template: `
     <ng-container *ngIf="vm$ | async as vm">
-      <div class="max-w-2xl mx-auto p-4">
+      <div class="text-right">
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon fontIcon="more_horiz"></mat-icon>
+        </button>
+        <mat-menu #menu>
+          <button mat-menu-item (click)="menuAction()">Reset all</button>
+          <button mat-menu-item (click)="menuAction()">Clear guesses</button>
+        </mat-menu>
+      </div>
+
+      <div class="max-w-2xl mx-auto pb-4 px-4">
         <!-- add words form -->
         <ng-container>
-          <div class="py-4">
+          <div class="mb-4">
             <form #addWordsForm (ngSubmit)="addWords($event)">
               <mat-form-field class="w-full" color="accent">
                 <mat-label>Terminal passwords</mat-label>
@@ -147,6 +157,10 @@ export class TerminalHackingComponent {
   });
 
   addWords(event: Event) {
-    console.log("add");
+    console.log(event);
+  }
+
+  menuAction() {
+    console.log("menu");
   }
 }
