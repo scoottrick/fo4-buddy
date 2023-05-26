@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { MatChipsModule } from "@angular/material/chips";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -11,16 +11,22 @@ import { MatListModule } from "@angular/material/list";
 import { MatMenuModule } from "@angular/material/menu";
 
 import { TerminalHackingComponent } from "./feature/terminal-hacking/terminal-hacking.component";
-import { NewPasswordsComponent } from './ui/new-passwords/new-passwords.component';
-import { GuessPickerComponent } from './ui/guess-picker/guess-picker.component';
-import { CurrentGuessComponent } from './ui/current-guess/current-guess.component';
-import { PreviousGuessesComponent } from './ui/previous-guesses/previous-guesses.component';
+import { NewPasswordsComponent } from "./ui/new-passwords/new-passwords.component";
+import { GuessPickerComponent } from "./ui/guess-picker/guess-picker.component";
+import { CurrentGuessComponent } from "./ui/current-guess/current-guess.component";
+import { PreviousGuessesComponent } from "./ui/previous-guesses/previous-guesses.component";
 
 @NgModule({
-  declarations: [TerminalHackingComponent, NewPasswordsComponent, GuessPickerComponent, CurrentGuessComponent, PreviousGuessesComponent],
+  declarations: [
+    TerminalHackingComponent,
+    NewPasswordsComponent,
+    GuessPickerComponent,
+    CurrentGuessComponent,
+    PreviousGuessesComponent,
+  ],
   imports: [
     CommonModule,
-    FormsModule,
+    ReactiveFormsModule,
     MatChipsModule,
     MatFormFieldModule,
     MatInputModule,
