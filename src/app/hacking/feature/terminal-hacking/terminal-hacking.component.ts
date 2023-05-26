@@ -34,25 +34,7 @@ const samplePasswords = [
       </div>
 
       <div class="max-w-2xl mx-auto pb-4 px-4">
-        <!-- add words form -->
         <fo-new-passwords (wordsAdded)="addNewWords($event)"></fo-new-passwords>
-        <!-- <ng-container>
-          <div class="mb-4">
-            <form #addWordsForm (ngSubmit)="addWords($event)">
-              <mat-form-field class="w-full" color="accent">
-                <mat-label>Terminal passwords</mat-label>
-                <input matInput type="text" placeholder="" />
-                <mat-hint
-                  >Enter the passwords from the in-game terminal separated by
-                  spaces.</mat-hint
-                >
-                <button type="submit" matSuffix mat-icon-button color="accent">
-                  <mat-icon fontIcon="add"></mat-icon>
-                </button>
-              </mat-form-field>
-            </form>
-          </div>
-        </ng-container> -->
 
         <!-- guess chips -->
         <ng-container>
