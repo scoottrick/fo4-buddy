@@ -42,32 +42,10 @@ const samplePasswords = [
           (wordChanged)="changeActiveGuess($event)"
         ></fo-guess-picker>
 
-        <!-- guess maker -->
-        <ng-container>
-          <div class="guess py-8 max-w-md mx-auto text-center">
-            <h1 class="text-center font-mono">{{ vm.activeGuess }}</h1>
-            <div class="text-center p-4">
-              <mat-form-field color="accent">
-                <mat-label>Likeness</mat-label>
-                <input
-                  matInput
-                  inputmode="numeric"
-                  min="0"
-                  [max]="vm.activeGuess.length"
-                  maxlength="2"
-                  value="0"
-                  class="text-center"
-                />
-              </mat-form-field>
-              <div class="text-center">
-                <button mat-flat-button color="accent">
-                  <mat-icon fontIcon="add"></mat-icon>
-                  Add Guess
-                </button>
-              </div>
-            </div>
-          </div>
-        </ng-container>
+        <fo-current-guess
+          [word]="vm.activeGuess"
+          (likenessChanged)="updateGuessLikeness($event)"
+        ></fo-current-guess>
 
         <!-- previous guesses -->
         <ng-container>
@@ -105,7 +83,7 @@ const samplePasswords = [
 })
 export class TerminalHackingComponent {
   private passwords$ = of(samplePasswords);
-  private activeGuess$ = this.passwords$.pipe(map((passwords) => passwords[0]));
+  private activeGuess$ = this.passwords$.pipe(map((passwords) => passwords[1]));
   private previousGuesses$: Observable<{ word: string; likeness: number }[]> =
     this.passwords$.pipe(
       map((passwords) => {
@@ -128,6 +106,10 @@ export class TerminalHackingComponent {
 
   changeActiveGuess(word: string) {
     console.log("guess:", word);
+  }
+
+  updateGuessLikeness(n: number) {
+    console.log("likeness:", n);
   }
 
   menuAction() {

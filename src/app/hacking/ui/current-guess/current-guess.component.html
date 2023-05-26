@@ -1,0 +1,28 @@
+<ng-container *ngIf="word">
+  <form (ngSubmit)="handleSubmittedGuess()">
+    <div class="guess py-8 max-w-md mx-auto text-center">
+      <h1 class="text-center font-mono">{{ word }}</h1>
+      <div class="text-center p-4">
+        <mat-form-field color="accent">
+          <mat-label>Likeness</mat-label>
+          <input
+            matInput
+            inputmode="numeric"
+            min="0"
+            [max]="word.length"
+            maxlength="2"
+            value="0"
+            class="text-center"
+            (change)="handleChangedLikeness($event)"
+          />
+        </mat-form-field>
+        <div class="text-center">
+          <button mat-flat-button color="accent">
+            <mat-icon fontIcon="add"></mat-icon>
+            Add Guess
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-container>

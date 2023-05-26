@@ -13,9 +13,10 @@ import { MatMenuModule } from "@angular/material/menu";
 import { TerminalHackingComponent } from "./feature/terminal-hacking/terminal-hacking.component";
 import { NewPasswordsComponent } from './ui/new-passwords/new-passwords.component';
 import { GuessPickerComponent } from './ui/guess-picker/guess-picker.component';
+import { CurrentGuessComponent } from './ui/current-guess/current-guess.component';
 
 @NgModule({
-  declarations: [TerminalHackingComponent, NewPasswordsComponent, GuessPickerComponent],
+  declarations: [TerminalHackingComponent, NewPasswordsComponent, GuessPickerComponent, CurrentGuessComponent],
   imports: [
     CommonModule,
     FormsModule,
