@@ -14,9 +14,10 @@ import { TerminalHackingComponent } from "./feature/terminal-hacking/terminal-ha
 import { NewPasswordsComponent } from './ui/new-passwords/new-passwords.component';
 import { GuessPickerComponent } from './ui/guess-picker/guess-picker.component';
 import { CurrentGuessComponent } from './ui/current-guess/current-guess.component';
+import { PreviousGuessesComponent } from './ui/previous-guesses/previous-guesses.component';
 
 @NgModule({
-  declarations: [TerminalHackingComponent, NewPasswordsComponent, GuessPickerComponent, CurrentGuessComponent],
+  declarations: [TerminalHackingComponent, NewPasswordsComponent, GuessPickerComponent, CurrentGuessComponent, PreviousGuessesComponent],
   imports: [
     CommonModule,
     FormsModule,

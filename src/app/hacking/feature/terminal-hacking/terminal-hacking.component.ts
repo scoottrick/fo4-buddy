@@ -36,7 +36,6 @@ const samplePasswords = [
       <div class="max-w-2xl mx-auto pb-4 px-4">
         <fo-new-passwords (wordsAdded)="addNewWords($event)"></fo-new-passwords>
 
-        <!-- guess chips -->
         <fo-guess-picker
           [passwords]="vm.passwords"
           (wordChanged)="changeActiveGuess($event)"
@@ -47,23 +46,10 @@ const samplePasswords = [
           (likenessChanged)="updateGuessLikeness($event)"
         ></fo-current-guess>
 
-        <!-- previous guesses -->
-        <ng-container>
-          <ul>
-            <ng-container *ngFor="let guess of vm.previousGuesses">
-              <li class="flex flex-row items-center py-1 font-mono">
-                <span class="grow">
-                  > {{ guess.word }}
-                  <br />
-                  > Likeness: {{ guess.likeness }}
-                </span>
-                <button mat-icon-button color="warn">
-                  <mat-icon fontIcon="delete"></mat-icon>
-                </button>
-              </li>
-            </ng-container>
-          </ul>
-        </ng-container>
+        <fo-previous-guesses
+          [guesses]="vm.previousGuesses"
+          (guessDeleted)="deletePreviousGuess($event)"
+        ></fo-previous-guesses>
       </div>
     </ng-container>
   `,
@@ -110,6 +96,14 @@ export class TerminalHackingComponent {
 
   updateGuessLikeness(n: number) {
     console.log("likeness:", n);
+  }
+
+  addNewGuess(word: string, likeness: number) {
+    console.log("new guess:", { word, likeness });
+  }
+
+  deletePreviousGuess(word: string) {
+    console.log("delete guess:", word);
   }
 
   menuAction() {
