@@ -11,9 +11,10 @@ import { MatListModule } from "@angular/material/list";
 import { MatMenuModule } from "@angular/material/menu";
 
 import { TerminalHackingComponent } from "./feature/terminal-hacking/terminal-hacking.component";
+import { NewPasswordsComponent } from './ui/new-passwords/new-passwords.component';
 
 @NgModule({
-  declarations: [TerminalHackingComponent],
+  declarations: [TerminalHackingComponent, NewPasswordsComponent],
   imports: [
     CommonModule,
     FormsModule,

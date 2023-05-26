@@ -35,7 +35,8 @@ const samplePasswords = [
 
       <div class="max-w-2xl mx-auto pb-4 px-4">
         <!-- add words form -->
-        <ng-container>
+        <fo-new-passwords (wordsAdded)="addNewWords($event)"></fo-new-passwords>
+        <!-- <ng-container>
           <div class="mb-4">
             <form #addWordsForm (ngSubmit)="addWords($event)">
               <mat-form-field class="w-full" color="accent">
@@ -51,7 +52,7 @@ const samplePasswords = [
               </mat-form-field>
             </form>
           </div>
-        </ng-container>
+        </ng-container> -->
 
         <!-- guess chips -->
         <ng-container>
@@ -156,8 +157,8 @@ export class TerminalHackingComponent {
     previousGuesses: this.previousGuesses$,
   });
 
-  addWords(event: Event) {
-    console.log(event);
+  addNewWords(words: string[]) {
+    console.log("new words", words);
   }
 
   menuAction() {
