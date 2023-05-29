@@ -1,0 +1,20 @@
+<ng-container *ngIf="attempts?.length">
+  <ul>
+    <ng-container *ngFor="let attempt of attempts">
+      <li class="flex flex-row items-center py-1 font-mono">
+        <span class="grow">
+          > {{ attempt.word }}
+          <br />
+          > Likeness: {{ attempt.likeness }}
+        </span>
+        <button
+          mat-icon-button
+          color="warn"
+          (click)="handleDeleteClicked(attempt)"
+        >
+          <mat-icon fontIcon="delete"></mat-icon>
+        </button>
+      </li>
+    </ng-container>
+  </ul>
+</ng-container>

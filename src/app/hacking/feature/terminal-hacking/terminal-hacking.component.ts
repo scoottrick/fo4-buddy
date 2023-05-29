@@ -30,10 +30,11 @@ import { TerminalHackingService } from "../../data-access/terminal-hacking.servi
           (likenessChanged)="updateGuessLikeness($event)"
         ></fo-current-guess>
 
-        <fo-previous-guesses
-          [guesses]="vm.previousGuesses"
-          (guessDeleted)="deletePreviousGuess($event)"
-        ></fo-previous-guesses>
+        <fo-previous-attempts
+          [attempts]="vm.previousGuesses"
+          (attemptRemoved)="removeHackingAttempt($event)"
+        >
+        </fo-previous-attempts>
       </div>
     </ng-container>
   `,
@@ -92,8 +93,8 @@ export class TerminalHackingComponent {
     console.log("new guess:", { word, likeness });
   }
 
-  deletePreviousGuess(word: string) {
-    console.log("delete guess:", word);
+  removeHackingAttempt(attempt: HackingAttempt) {
+    console.log("remove attempt:", attempt);
   }
 
   menuAction() {
