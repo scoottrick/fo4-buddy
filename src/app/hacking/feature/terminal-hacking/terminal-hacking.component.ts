@@ -6,40 +6,7 @@ import { TerminalHackingService } from "../../data-access/terminal-hacking.servi
 
 @Component({
   selector: "fo-terminal-hacking",
-  template: `
-    <ng-container *ngIf="vm$ | async as vm">
-      <div class="text-right">
-        <button mat-icon-button [matMenuTriggerFor]="menu">
-          <mat-icon fontIcon="more_horiz"></mat-icon>
-        </button>
-        <mat-menu #menu>
-          <button mat-menu-item (click)="menuAction()">Reset all</button>
-          <button mat-menu-item (click)="menuAction()">Clear guesses</button>
-        </mat-menu>
-      </div>
-
-      <div class="max-w-2xl mx-auto pb-4 px-4">
-        <fo-new-passwords (wordsAdded)="addNewWords($event)"></fo-new-passwords>
-
-        <fo-password-picker
-          [passwords]="vm.passwords"
-          (wordSelected)="changeSelectedPassword($event)"
-        ></fo-password-picker>
-
-        <fo-current-attempt
-          [attempt]="vm.currentAttempt"
-          (attemptUpdated)="updateCurrentAttempt($event)"
-          (attemptSubmitted)="addNewAttempt($event)"
-        ></fo-current-attempt>
-
-        <fo-previous-attempts
-          [attempts]="vm.previousAttempts"
-          (attemptRemoved)="removeHackingAttempt($event)"
-        >
-        </fo-previous-attempts>
-      </div>
-    </ng-container>
-  `,
+  templateUrl: "./terminal-hacking.component.html",
   styles: [
     `
       .guess ::ng-deep .mat-mdc-form-field-infix {
