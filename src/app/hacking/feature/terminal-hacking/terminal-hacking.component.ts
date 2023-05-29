@@ -1,5 +1,5 @@
 import { Component, inject } from "@angular/core";
-import { combineLatest, map } from "rxjs";
+import { combineLatest, map, tap } from "rxjs";
 
 import { HackingAttempt } from "../../data-access/hacking-attempt";
 import { TerminalHackingService } from "../../data-access/terminal-hacking.service";
@@ -28,19 +28,14 @@ export class TerminalHackingComponent {
   private hackingService = inject(TerminalHackingService);
 
   private passwords$ = this.hackingService.terminalPasswords$;
-  private currentAttempt$ = this.passwords$.pipe(
-    map((passwords) => {
-      if (passwords.length) {
-        return <HackingAttempt>{ word: passwords[0], likeness: 0 };
-      }
-      return undefined;
-    })
-  );
-  private previousAttempts$ = this.hackingService.hackingAttempts$;
+  private currentAttempt$ = this.hackingService.currentAttempt$;
+  private previousAttempts$ = this.hackingService.previousAttempts$;
 
   vm$ = combineLatest({
     passwords: this.passwords$,
-    currentAttempt: this.currentAttempt$,
+    currentAttempt: this.currentAttempt$.pipe(
+      tap((current) => console.log(current))
+    ),
     previousAttempts: this.previousAttempts$,
   });
 
@@ -55,6 +50,7 @@ export class TerminalHackingComponent {
 
   changeSelectedPassword(word: string) {
     console.log("select password:", word);
+    this.hackingService.setAttemptWord(word);
   }
 
   updateCurrentAttempt(attempt: HackingAttempt) {
