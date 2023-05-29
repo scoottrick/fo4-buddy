@@ -1,5 +1,6 @@
 import { Component, inject } from "@angular/core";
-import { Observable, combineLatest, map, of } from "rxjs";
+import { combineLatest, map } from "rxjs";
+
 import { HackingAttempt } from "../../data-access/hacking-attempt";
 import { TerminalHackingService } from "../../data-access/terminal-hacking.service";
 
@@ -32,7 +33,7 @@ import { TerminalHackingService } from "../../data-access/terminal-hacking.servi
         ></fo-current-attempt>
 
         <fo-previous-attempts
-          [attempts]="vm.previousGuesses"
+          [attempts]="vm.previousAttempts"
           (attemptRemoved)="removeHackingAttempt($event)"
         >
         </fo-previous-attempts>
@@ -57,10 +58,10 @@ export class TerminalHackingComponent {
   private hackingService = inject(TerminalHackingService);
 
   private passwords$ = this.hackingService.terminalPasswords$;
-  private currentAttempt$: Observable<HackingAttempt> = this.passwords$.pipe(
-    map((passwords) => ({ word: passwords[1], likeness: 0 }))
+  private currentAttempt$ = this.passwords$.pipe(
+    map((passwords) => <HackingAttempt>{ word: passwords[1], likeness: 0 })
   );
-  private previousGuesses$ = this.passwords$.pipe(
+  private previousAttempts$ = this.passwords$.pipe(
     map((passwords) => {
       return <HackingAttempt[]>[
         { word: passwords[0], likeness: 3 },
@@ -72,7 +73,7 @@ export class TerminalHackingComponent {
   vm$ = combineLatest({
     passwords: this.passwords$,
     currentAttempt: this.currentAttempt$,
-    previousGuesses: this.previousGuesses$,
+    previousAttempts: this.previousAttempts$,
   });
 
   ngOnInit(): void {
