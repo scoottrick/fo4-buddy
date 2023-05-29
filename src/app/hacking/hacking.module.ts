@@ -12,17 +12,17 @@ import { MatMenuModule } from "@angular/material/menu";
 
 import { TerminalHackingComponent } from "./feature/terminal-hacking/terminal-hacking.component";
 import { NewPasswordsComponent } from "./ui/new-passwords/new-passwords.component";
-import { GuessPickerComponent } from "./ui/guess-picker/guess-picker.component";
 import { PreviousAttemptsComponent } from "./ui/previous-attempts/previous-attempts.component";
 import { CurrentAttemptComponent } from "./ui/current-attempt/current-attempt.component";
+import { PasswordPickerComponent } from "./ui/password-picker/password-picker.component";
 
 @NgModule({
   declarations: [
     TerminalHackingComponent,
     NewPasswordsComponent,
-    GuessPickerComponent,
     PreviousAttemptsComponent,
     CurrentAttemptComponent,
+    PasswordPickerComponent,
   ],
   imports: [
     CommonModule,

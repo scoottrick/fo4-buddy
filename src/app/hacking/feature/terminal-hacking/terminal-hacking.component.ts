@@ -20,10 +20,10 @@ import { TerminalHackingService } from "../../data-access/terminal-hacking.servi
       <div class="max-w-2xl mx-auto pb-4 px-4">
         <fo-new-passwords (wordsAdded)="addNewWords($event)"></fo-new-passwords>
 
-        <fo-guess-picker
+        <fo-password-picker
           [passwords]="vm.passwords"
-          (wordChanged)="changeActiveGuess($event)"
-        ></fo-guess-picker>
+          (wordSelected)="changeSelectedPassword($event)"
+        ></fo-password-picker>
 
         <fo-current-attempt
           [attempt]="vm.currentAttempt"
@@ -84,12 +84,8 @@ export class TerminalHackingComponent {
     this.hackingService.addNewPasswords(words);
   }
 
-  changeActiveGuess(word: string) {
-    console.log("guess:", word);
-  }
-
-  updateGuessLikeness(n: number) {
-    console.log("likeness:", n);
+  changeSelectedPassword(word: string) {
+    console.log("select password:", word);
   }
 
   updateCurrentAttempt(attempt: HackingAttempt) {
