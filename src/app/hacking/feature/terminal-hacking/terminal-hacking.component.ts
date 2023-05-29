@@ -1,24 +1,7 @@
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { combineLatest, map, of } from "rxjs";
 import { TerminalGuess } from "../../data-access/terminal-guess";
-
-const samplePasswords = [
-  "takes",
-  "known",
-  "kicks",
-  "stark",
-  "boots",
-  "baton",
-  "clear",
-  "crime",
-  "waste",
-  "close",
-  "sword",
-  "slave",
-  "fargo",
-  "maybe",
-  "males",
-];
+import { TerminalHackingService } from "../../data-access/terminal-hacking.service";
 
 @Component({
   selector: "fo-terminal-hacking",
@@ -69,7 +52,9 @@ const samplePasswords = [
   ],
 })
 export class TerminalHackingComponent {
-  private passwords$ = of(samplePasswords);
+  private hackingService = inject(TerminalHackingService);
+
+  private passwords$ = this.hackingService.terminalPasswords$;
   private activeGuess$ = this.passwords$.pipe(map((passwords) => passwords[1]));
   private previousGuesses$ = this.passwords$.pipe(
     map((passwords) => {
@@ -86,8 +71,13 @@ export class TerminalHackingComponent {
     previousGuesses: this.previousGuesses$,
   });
 
+  ngOnInit(): void {
+    this.hackingService.init();
+  }
+
   addNewWords(words: string[]) {
     console.log("new words", words);
+    this.hackingService.addNewPasswords(words);
   }
 
   changeActiveGuess(word: string) {
