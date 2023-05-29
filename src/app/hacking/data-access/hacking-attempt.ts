@@ -1,4 +1,4 @@
-export interface TerminalGuess {
+export interface HackingAttempt {
   word: string;
   likeness: number;
 }

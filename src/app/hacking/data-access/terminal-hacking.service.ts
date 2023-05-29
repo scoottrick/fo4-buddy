@@ -7,14 +7,14 @@ import {
   map,
   startWith,
 } from "rxjs";
-import { TerminalGuess } from "./hacking-attempt";
+import { HackingAttempt } from "./hacking-attempt";
 
 @Injectable({
   providedIn: "root",
 })
 export class TerminalHackingService {
   private passwordList: string[] = [];
-  private passwordAttempts: TerminalGuess[] = [];
+  private passwordAttempts: HackingAttempt[] = [];
 
   private passwordListSubject = new BehaviorSubject(this.passwordList);
   private passwordAttemptsSubject = new BehaviorSubject(this.passwordAttempts);
@@ -33,7 +33,7 @@ export class TerminalHackingService {
     );
   }
 
-  getPossibleOptions(previousGuesses: TerminalGuess[]) {
+  getPossibleOptions(previousGuesses: HackingAttempt[]) {
     return this.terminalPasswords$.pipe(
       map((passwordList) => {
         return this.getValidPasswordsFromGuesses(passwordList, previousGuesses);
@@ -56,7 +56,7 @@ export class TerminalHackingService {
     this.passwordListSubject.next(words);
   }
 
-  private setAttempts(attempts: TerminalGuess[]) {
+  private setAttempts(attempts: HackingAttempt[]) {
     this.passwordAttempts = attempts;
     this.passwordAttemptsSubject.next(attempts);
   }
@@ -73,7 +73,7 @@ export class TerminalHackingService {
     return likeness;
   }
 
-  getValidPasswordsFromGuesses(passwords: string[], guesses: TerminalGuess[]) {
+  getValidPasswordsFromGuesses(passwords: string[], guesses: HackingAttempt[]) {
     return passwords.filter((password) => {
       const isValidPassword = guesses.every((guess) => {
         const comparedLikeness = this.calculateLikeness(guess.word, password);

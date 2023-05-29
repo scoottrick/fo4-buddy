@@ -1,6 +1,6 @@
 import { Component, inject } from "@angular/core";
 import { combineLatest, map, of } from "rxjs";
-import { TerminalGuess } from "../../data-access/hacking-attempt";
+import { HackingAttempt } from "../../data-access/hacking-attempt";
 import { TerminalHackingService } from "../../data-access/terminal-hacking.service";
 
 @Component({
@@ -58,7 +58,7 @@ export class TerminalHackingComponent {
   private activeGuess$ = this.passwords$.pipe(map((passwords) => passwords[1]));
   private previousGuesses$ = this.passwords$.pipe(
     map((passwords) => {
-      return <TerminalGuess[]>[
+      return <HackingAttempt[]>[
         { word: passwords[0], likeness: 3 },
         { word: passwords[1], likeness: 1 },
       ];

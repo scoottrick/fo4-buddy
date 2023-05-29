@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { TerminalGuess } from "../../data-access/hacking-attempt";
+import { HackingAttempt } from "../../data-access/hacking-attempt";
 
 @Component({
   selector: "fo-previous-guesses",
@@ -7,10 +7,10 @@ import { TerminalGuess } from "../../data-access/hacking-attempt";
   styles: [],
 })
 export class PreviousGuessesComponent {
-  @Input() guesses?: TerminalGuess[];
+  @Input() guesses?: HackingAttempt[];
   @Output() guessDeleted = new EventEmitter<string>();
 
-  handleDeleteClick(guess: TerminalGuess) {
+  handleDeleteClick(guess: HackingAttempt) {
     this.guessDeleted.emit(guess.word);
   }
 }
