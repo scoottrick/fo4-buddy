@@ -14,32 +14,22 @@ import { HackingAttempt } from "./hacking-attempt";
 })
 export class TerminalHackingService {
   private passwordList: string[] = [];
-  private passwordAttempts: HackingAttempt[] = [];
+  private hackingAttempts: HackingAttempt[] = [];
 
   private passwordListSubject = new BehaviorSubject(this.passwordList);
-  private passwordAttemptsSubject = new BehaviorSubject(this.passwordAttempts);
+  private hackingAttemptsSubject = new BehaviorSubject(this.hackingAttempts);
 
   terminalPasswords$ = this.passwordListSubject.asObservable();
-  passwordAttempts$ = this.passwordAttemptsSubject.asObservable();
+  hackingAttempts$ = this.hackingAttemptsSubject.asObservable();
 
-  getValidPasswordOptions() {
-    combineLatest({
-      passwords: this.terminalPasswords$,
-      attempts: this.passwordAttempts$,
-    }).pipe(
-      map(({ passwords, attempts }) =>
-        this.getValidPasswordsFromGuesses(passwords, attempts)
-      )
-    );
-  }
-
-  getPossibleOptions(previousGuesses: HackingAttempt[]) {
-    return this.terminalPasswords$.pipe(
-      map((passwordList) => {
-        return this.getValidPasswordsFromGuesses(passwordList, previousGuesses);
-      })
-    );
-  }
+  validPasswordOptions$ = combineLatest({
+    passwords: this.terminalPasswords$,
+    attempts: this.hackingAttempts$,
+  }).pipe(
+    map(({ passwords, attempts }) =>
+      this.getValidPasswordsFromGuesses(passwords, attempts)
+    )
+  );
 
   init() {
     this.setPasswords([]);
@@ -57,8 +47,8 @@ export class TerminalHackingService {
   }
 
   private setAttempts(attempts: HackingAttempt[]) {
-    this.passwordAttempts = attempts;
-    this.passwordAttemptsSubject.next(attempts);
+    this.hackingAttempts = attempts;
+    this.hackingAttemptsSubject.next(attempts);
   }
 
   calculateLikeness(str1: string, str2: string): number {
@@ -73,11 +63,14 @@ export class TerminalHackingService {
     return likeness;
   }
 
-  getValidPasswordsFromGuesses(passwords: string[], guesses: HackingAttempt[]) {
+  getValidPasswordsFromGuesses(
+    passwords: string[],
+    attempts: HackingAttempt[]
+  ) {
     return passwords.filter((password) => {
-      const isValidPassword = guesses.every((guess) => {
-        const comparedLikeness = this.calculateLikeness(guess.word, password);
-        return comparedLikeness === guess.likeness;
+      const isValidPassword = attempts.every((attempt) => {
+        const comparedLikeness = this.calculateLikeness(attempt.word, password);
+        return comparedLikeness === attempt.likeness;
       });
       return isValidPassword;
     });
