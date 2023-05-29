@@ -4,6 +4,9 @@ import { combineLatest, map } from "rxjs";
 import { HackingAttempt } from "../../data-access/hacking-attempt";
 import { TerminalHackingService } from "../../data-access/terminal-hacking.service";
 
+const samplePasswordString =
+  "takes known kicks stark boots baton clear crime waste close sword slave fargo maybe males";
+
 @Component({
   selector: "fo-terminal-hacking",
   templateUrl: "./terminal-hacking.component.html",
