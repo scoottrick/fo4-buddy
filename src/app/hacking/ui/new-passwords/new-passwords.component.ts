@@ -23,16 +23,14 @@ export class NewPasswordsComponent {
     if (!this.newWordsForm.valid) {
       return;
     }
-    const inputString = this.newWordsForm.value.wordInput || "";
-    const words: string[] = splitIntoWords(
-      this.newWordsForm.value.wordInput || ""
-    );
 
+    const inputString = this.newWordsForm.value.wordInput || "";
     const errors = checkForErrors(inputString);
-    if (!errors) {
+    if (errors) {
       return;
     }
 
+    const words = splitIntoWords(inputString);
     this.wordsAdded.emit(words);
   }
 
@@ -58,6 +56,6 @@ function checkForErrors(
   return null;
 }
 
-function splitIntoWords(input: string = "") {
+function splitIntoWords(input: string): string[] {
   return input.replace(/\s/g, ";").split(";");
 }
