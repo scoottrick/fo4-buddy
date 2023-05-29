@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { TerminalGuess } from "../../data-access/terminal-guess";
+import { TerminalGuess } from "../../data-access/hacking-attempt";
 
 @Component({
   selector: "fo-previous-guesses",

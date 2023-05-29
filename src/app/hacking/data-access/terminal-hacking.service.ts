@@ -7,7 +7,7 @@ import {
   map,
   startWith,
 } from "rxjs";
-import { TerminalGuess } from "./terminal-guess";
+import { TerminalGuess } from "./hacking-attempt";
 
 @Injectable({
   providedIn: "root",

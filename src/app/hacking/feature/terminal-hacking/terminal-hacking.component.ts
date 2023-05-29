@@ -1,6 +1,6 @@
 import { Component, inject } from "@angular/core";
 import { combineLatest, map, of } from "rxjs";
-import { TerminalGuess } from "../../data-access/terminal-guess";
+import { TerminalGuess } from "../../data-access/hacking-attempt";
 import { TerminalHackingService } from "../../data-access/terminal-hacking.service";
 
 @Component({
