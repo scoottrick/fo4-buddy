@@ -1,5 +1,5 @@
 import { Component, inject } from "@angular/core";
-import { combineLatest, map, of } from "rxjs";
+import { Observable, combineLatest, map, of } from "rxjs";
 import { HackingAttempt } from "../../data-access/hacking-attempt";
 import { TerminalHackingService } from "../../data-access/terminal-hacking.service";
 
@@ -25,10 +25,11 @@ import { TerminalHackingService } from "../../data-access/terminal-hacking.servi
           (wordChanged)="changeActiveGuess($event)"
         ></fo-guess-picker>
 
-        <fo-current-guess
-          [word]="vm.activeGuess"
-          (likenessChanged)="updateGuessLikeness($event)"
-        ></fo-current-guess>
+        <fo-current-attempt
+          [attempt]="vm.currentAttempt"
+          (attemptUpdated)="updateCurrentAttempt($event)"
+          (attemptSubmitted)="addNewAttempt($event)"
+        ></fo-current-attempt>
 
         <fo-previous-attempts
           [attempts]="vm.previousGuesses"
@@ -56,7 +57,9 @@ export class TerminalHackingComponent {
   private hackingService = inject(TerminalHackingService);
 
   private passwords$ = this.hackingService.terminalPasswords$;
-  private activeGuess$ = this.passwords$.pipe(map((passwords) => passwords[1]));
+  private currentAttempt$: Observable<HackingAttempt> = this.passwords$.pipe(
+    map((passwords) => ({ word: passwords[1], likeness: 0 }))
+  );
   private previousGuesses$ = this.passwords$.pipe(
     map((passwords) => {
       return <HackingAttempt[]>[
@@ -68,7 +71,7 @@ export class TerminalHackingComponent {
 
   vm$ = combineLatest({
     passwords: this.passwords$,
-    activeGuess: this.activeGuess$,
+    currentAttempt: this.currentAttempt$,
     previousGuesses: this.previousGuesses$,
   });
 
@@ -89,8 +92,12 @@ export class TerminalHackingComponent {
     console.log("likeness:", n);
   }
 
-  addNewGuess(word: string, likeness: number) {
-    console.log("new guess:", { word, likeness });
+  updateCurrentAttempt(attempt: HackingAttempt) {
+    console.log("update attempt:", attempt);
+  }
+
+  addNewAttempt(attempt: HackingAttempt) {
+    console.log("add attempt:", attempt);
   }
 
   removeHackingAttempt(attempt: HackingAttempt) {
