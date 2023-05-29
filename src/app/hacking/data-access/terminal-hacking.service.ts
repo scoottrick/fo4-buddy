@@ -34,7 +34,6 @@ export class TerminalHackingService {
   init() {
     this.setPasswords([]);
     this.setAttempts([]);
-    this.setPasswords(getSamplePasswords());
   }
 
   addNewPasswords(words: string[]) {

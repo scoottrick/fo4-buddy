@@ -29,16 +29,14 @@ export class TerminalHackingComponent {
 
   private passwords$ = this.hackingService.terminalPasswords$;
   private currentAttempt$ = this.passwords$.pipe(
-    map((passwords) => <HackingAttempt>{ word: passwords[1], likeness: 0 })
-  );
-  private previousAttempts$ = this.passwords$.pipe(
     map((passwords) => {
-      return <HackingAttempt[]>[
-        { word: passwords[0], likeness: 3 },
-        { word: passwords[1], likeness: 1 },
-      ];
+      if (passwords.length) {
+        return <HackingAttempt>{ word: passwords[0], likeness: 0 };
+      }
+      return undefined;
     })
   );
+  private previousAttempts$ = this.hackingService.hackingAttempts$;
 
   vm$ = combineLatest({
     passwords: this.passwords$,
