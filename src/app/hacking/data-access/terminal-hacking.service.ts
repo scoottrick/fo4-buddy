@@ -1,12 +1,5 @@
 import { Injectable } from "@angular/core";
-import {
-  BehaviorSubject,
-  Subject,
-  combineLatest,
-  filter,
-  map,
-  startWith,
-} from "rxjs";
+import { BehaviorSubject, Subject, combineLatest, map, startWith } from "rxjs";
 import { HackingAttempt } from "./hacking-attempt";
 
 @Injectable({
@@ -94,24 +87,4 @@ export class TerminalHackingService {
       return isValidPassword;
     });
   }
-}
-
-function getSamplePasswords() {
-  return [
-    "takes",
-    "known",
-    "kicks",
-    "stark",
-    "boots",
-    "baton",
-    "clear",
-    "crime",
-    "waste",
-    "close",
-    "sword",
-    "slave",
-    "fargo",
-    "maybe",
-    "males",
-  ];
 }
