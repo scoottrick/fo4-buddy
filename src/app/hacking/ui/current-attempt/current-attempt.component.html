@@ -1,19 +1,19 @@
-<ng-container *ngIf="attempt">
-  <form (ngSubmit)="handleSubmittedAttempt()">
+<ng-container *ngIf="password">
+  <form [formGroup]="attemptForm" (ngSubmit)="handleSubmittedAttempt()">
     <div class="guess py-8 max-w-md mx-auto text-center">
-      <h1 class="text-center font-mono">{{ attempt.word }}</h1>
+      <h1 class="text-center font-mono">{{ password }}</h1>
       <div class="text-center p-4">
         <mat-form-field color="accent">
           <mat-label>Likeness</mat-label>
           <input
             matInput
+            class="text-center"
             inputmode="numeric"
             min="0"
             maxlength="2"
-            [max]="attempt.word.length"
-            [value]="attempt.likeness"
-            class="text-center"
-            (change)="handleChangedLikeness($event)"
+            value="0"
+            [max]="password.length"
+            formControlName="likeness"
           />
         </mat-form-field>
         <div class="text-center">

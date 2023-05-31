@@ -1,11 +1,18 @@
 import { Component, inject } from "@angular/core";
-import { combineLatest, map, tap } from "rxjs";
 
 import { HackingAttempt } from "../../data-access/hacking-attempt";
 import { TerminalHackingService } from "../../data-access/terminal-hacking.service";
 
-const samplePasswordString =
+const samplePasswordString = () =>
   "takes known kicks stark boots baton clear crime waste close sword slave fargo maybe males";
+const samplePasswords = () => samplePasswordString().split(" ");
+
+interface ViewModel {
+  passwords: string[];
+  selectedPassword: string | undefined;
+  previousAttempts: HackingAttempt[];
+  availablePasswords: string[];
+}
 
 @Component({
   selector: "fo-terminal-hacking",
@@ -27,45 +34,72 @@ const samplePasswordString =
 export class TerminalHackingComponent {
   private hackingService = inject(TerminalHackingService);
 
-  private passwords$ = this.hackingService.terminalPasswords$;
-  private currentAttempt$ = this.hackingService.currentAttempt$;
-  private previousAttempts$ = this.hackingService.previousAttempts$;
+  vm: ViewModel = {
+    passwords: [],
+    selectedPassword: undefined,
+    previousAttempts: [],
+    availablePasswords: [],
+  };
 
-  vm$ = combineLatest({
-    passwords: this.passwords$,
-    currentAttempt: this.currentAttempt$.pipe(
-      tap((current) => console.log(current))
-    ),
-    previousAttempts: this.previousAttempts$,
-  });
+  private updateView(updates: Partial<ViewModel>) {
+    if (updates.passwords || updates.previousAttempts) {
+      const passwords = updates.passwords || this.vm.passwords;
+      const attempts = updates.previousAttempts || this.vm.previousAttempts;
+      const availablePasswords = this.hackingService.filterAvailablePasswords(
+        passwords,
+        attempts
+      );
+      const maintainSelection =
+        this.vm.selectedPassword &&
+        availablePasswords.includes(this.vm.selectedPassword);
+      const selectedPassword = maintainSelection
+        ? this.vm.selectedPassword
+        : availablePasswords[0];
+      updates.availablePasswords = availablePasswords;
+      updates.selectedPassword = selectedPassword;
+    }
 
-  ngOnInit(): void {
-    this.hackingService.init();
+    this.vm = { ...this.vm, ...updates };
   }
 
-  addNewWords(words: string[]) {
-    console.log("new words", words);
-    this.hackingService.addNewPasswords(words);
+  addPasswords(newWords: string[]) {
+    const uniquePasswords = new Set([...this.vm.passwords, ...newWords]);
+    const passwords = Array.from(uniquePasswords);
+    this.updateView({
+      passwords,
+    });
   }
 
   changeSelectedPassword(word: string) {
-    console.log("select password:", word);
-    this.hackingService.setAttemptWord(word);
-  }
-
-  updateCurrentAttempt(attempt: HackingAttempt) {
-    console.log("update attempt:", attempt);
+    this.updateView({ selectedPassword: word });
   }
 
   addNewAttempt(attempt: HackingAttempt) {
-    console.log("add attempt:", attempt);
+    const previousAttempts = [...this.vm.previousAttempts, attempt];
+    this.updateView({ previousAttempts });
   }
 
   removeHackingAttempt(attempt: HackingAttempt) {
-    console.log("remove attempt:", attempt);
+    const previousAttempts = this.vm.previousAttempts.filter((a) => {
+      return a.word !== attempt.word;
+    });
+    this.updateView({ previousAttempts });
   }
 
-  menuAction() {
-    console.log("menu");
+  clearPasswords() {
+    this.updateView({
+      passwords: [],
+      selectedPassword: undefined,
+      availablePasswords: [],
+      previousAttempts: [],
+    });
+  }
+
+  clearPreviousAttempts() {
+    this.updateView({
+      previousAttempts: [],
+      availablePasswords: [...this.vm.passwords],
+      selectedPassword: this.vm.passwords[0],
+    });
   }
 }

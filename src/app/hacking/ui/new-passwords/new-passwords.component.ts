@@ -32,6 +32,7 @@ export class NewPasswordsComponent {
 
     const words = splitIntoWords(inputString);
     this.wordsAdded.emit(words);
+    this.newWordsForm.controls.wordInput.setValue("");
   }
 
   private wordsAreValid(): ValidatorFn {

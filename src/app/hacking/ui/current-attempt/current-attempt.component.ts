@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { HackingAttempt } from "../../data-access/hacking-attempt";
+import { FormControl, FormGroup, NgForm } from "@angular/forms";
 
 @Component({
   selector: "fo-current-attempt",
@@ -7,29 +8,32 @@ import { HackingAttempt } from "../../data-access/hacking-attempt";
   styles: [],
 })
 export class CurrentAttemptComponent {
-  @Input() attempt?: HackingAttempt;
+  @Input() password?: string;
 
   @Output() attemptSubmitted = new EventEmitter<HackingAttempt>();
-  @Output() attemptUpdated = new EventEmitter<HackingAttempt>();
+
+  attemptForm = new FormGroup({
+    likeness: new FormControl("0", []),
+  });
 
   handleSubmittedAttempt() {
-    if (this.attempt) {
-      this.attemptSubmitted.next(this.attempt);
+    if (!this.password) {
+      return;
     }
+    const formData = this.attemptForm.value;
+    const likeness = this.parseLikeness(formData.likeness || "");
+    const word = this.password;
+    if (!word || likeness < 0 || likeness > word.length) {
+      return;
+    }
+    this.attemptSubmitted.next({ word, likeness });
   }
 
-  handleChangedLikeness(event: any) {
-    if (!this.attempt) {
-      return;
+  private parseLikeness(input: string): number {
+    const likeness = parseInt(input);
+    if (isNaN(likeness)) {
+      return -1;
     }
-    const word = this.attempt.word;
-    const likenessInput = event.target.value;
-    const likeness = parseInt(likenessInput);
-    const isInvalidLikeness =
-      isNaN(likeness) || likeness < 0 || likeness > word.length;
-    if (isInvalidLikeness) {
-      return;
-    }
-    this.attemptUpdated.next({ word, likeness });
+    return likeness;
   }
 }
