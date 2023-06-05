@@ -1,7 +1,7 @@
 <ng-container *ngIf="issue">
-  <mat-checkbox [checked]="collected" (change)="toggle.emit()">
+  <mat-checkbox class="block" [checked]="collected" (change)="toggle.emit()">
     <div>
-      <div>
+      <div class="whitespace-nowrap overflow-x-hidden text-ellipsis">
         {{ issue.title }}
       </div>
       <div>
