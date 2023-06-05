@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from "@angular/core";
-import { BobbleheadService } from "../../../data-access/bobblehead.service";
-import { MagazineService } from "../../../data-access/magazine.service";
+import { BobbleheadService } from "../../data-access/bobblehead.service";
+import { MagazineService } from "../../data-access/magazine.service";
 
 @Component({
   selector: "fo-checklist-shell",

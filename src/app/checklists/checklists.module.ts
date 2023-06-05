@@ -10,7 +10,7 @@ import { MatDividerModule } from "@angular/material/divider";
 import { MatIconModule } from "@angular/material/icon";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 
-import { ChecklistShellComponent } from "./feature/checklist-shell/checklist-shell/checklist-shell.component";
+import { ChecklistShellComponent } from "./feature/checklist-shell/checklist-shell.component";
 import { BobbleheadChecklistComponent } from "./feature/bobblehead-checklist/bobblehead-checklist.component";
 import { MagazineChecklistComponent } from "./feature/magazine-checklist/magazine-checklist.component";
 import { CheckboxItemModule } from "../_shared/ui/checkbox-item/checkbox-item.module";
