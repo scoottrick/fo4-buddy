@@ -4,20 +4,7 @@ import { MagazineService } from "../../../data-access/magazine.service";
 
 @Component({
   selector: "fo-checklist-shell",
-  template: `
-    <mat-tab-group
-      class="h-full w-full overflow-y-scroll"
-      backgroundColor="primary"
-      headerPosition="below"
-    >
-      <mat-tab label="Bobbleheads">
-        <fo-bobblehead-checklist></fo-bobblehead-checklist>
-      </mat-tab>
-      <mat-tab label="Magazines">
-        <fo-magazine-checklist></fo-magazine-checklist>
-      </mat-tab>
-    </mat-tab-group>
-  `,
+  templateUrl: "./checklist-shell.component.html",
   styles: [
     `
       :host {
