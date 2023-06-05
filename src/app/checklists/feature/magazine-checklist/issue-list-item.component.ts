@@ -3,18 +3,7 @@ import { MagazineIssueObject } from "../../data-access/magazine";
 
 @Component({
   selector: "fo-issue-list-item",
-  template: `
-    <mat-checkbox [checked]="collected" (change)="toggle.emit()">
-      <div>
-        <div>
-          {{ issue?.title }}
-        </div>
-        <div>
-          {{ issue?.location?.name }}
-        </div>
-      </div>
-    </mat-checkbox>
-  `,
+  templateUrl: "./issue-list-item.component.html",
 })
 export class IssueListItemComponent {
   @Input() issue?: MagazineIssueObject;

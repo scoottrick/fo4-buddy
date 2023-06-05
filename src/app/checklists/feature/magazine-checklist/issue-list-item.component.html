@@ -1,0 +1,12 @@
+<ng-container *ngIf="issue">
+  <mat-checkbox [checked]="collected" (change)="toggle.emit()">
+    <div>
+      <div>
+        {{ issue.title }}
+      </div>
+      <div>
+        {{ issue.location.name }}
+      </div>
+    </div>
+  </mat-checkbox>
+</ng-container>
