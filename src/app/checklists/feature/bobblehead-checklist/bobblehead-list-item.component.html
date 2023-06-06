@@ -6,17 +6,21 @@
         {{ bobblehead.name }}
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <div class="mb-2">
-      <div>
-        <a mat-button color="accent" [href]="bobblehead.url">More Info</a>
+    <div class="mb-4">
+      <div class="mb-4">
+        <fo-text-link [href]="bobblehead.url" text="See Details"></fo-text-link>
       </div>
-      <div>
-        Location:
-        <a mat-button color="accent" [href]="bobblehead.location.url">{{
-          bobblehead.location.name
-        }}</a>
+      <div class="mb-2">
+        <span class="mr-2">Effect:</span>{{ bobblehead.effect }}
       </div>
-      <div>Effect: {{ bobblehead.effect }}</div>
+      <div class="flex flex-row items-center">
+        <span class="mr-2">Location:</span>
+        <fo-text-link
+          class="inline-block grow"
+          [href]="bobblehead.location.url"
+          [text]="bobblehead.location.name"
+        ></fo-text-link>
+      </div>
     </div>
 
     <ng-container *ngIf="!collected">
