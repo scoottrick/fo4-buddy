@@ -20,14 +20,6 @@ interface DialogData {
       .link {
         margin-bottom: 4px;
       }
-
-      .link {
-        margin-left: -8px;
-      }
-
-      .link a {
-        height: auto;
-      }
     `,
   ],
 })

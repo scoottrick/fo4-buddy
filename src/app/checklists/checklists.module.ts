@@ -19,6 +19,7 @@ import { MagazineListItemComponent } from "./feature/magazine-checklist/magazine
 import { BobbleheadListItem } from "./feature/bobblehead-checklist/bobblehead-list-item.component";
 import { IssueListItemComponent } from "./feature/magazine-checklist/issue-list-item.component";
 import { IssueDetailsComponent } from "./feature/magazine-checklist/issue-details.component";
+import { SharedModule } from "../_shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { IssueDetailsComponent } from "./feature/magazine-checklist/issue-detail
     MatIconModule,
     MatCheckboxModule,
     MatDialogModule,
+    SharedModule,
   ],
 })
 export class ChecklistsModule {}
