@@ -1,5 +1,9 @@
 import { Component, EventEmitter, Input, Output, inject } from "@angular/core";
-import { MagazineIssueId, MagazineObject } from "../../data-access/magazine";
+import {
+  MagazineIssueId,
+  MagazineIssueObject,
+  MagazineObject,
+} from "../../data-access/magazine";
 import { MagazineService } from "../../data-access/magazine.service";
 
 @Component({
@@ -21,6 +25,7 @@ import { MagazineService } from "../../data-access/magazine.service";
                   [issue]="issue"
                   [collected]="collectedIssues?.has(issue.id) || false"
                   (toggle)="toggleCollectedIssue.emit(issue.id)"
+                  (moreInfoClicked)="showIssueDetails(issue)"
                 ></fo-issue-list-item>
               </li>
             </ul>
@@ -36,4 +41,8 @@ export class MagazineListItemComponent {
   @Input() magazine?: MagazineObject;
   @Input() collectedIssues?: Set<MagazineIssueId>;
   @Output() toggleCollectedIssue = new EventEmitter<MagazineIssueId>();
+
+  showIssueDetails(issue: MagazineIssueObject) {
+    console.log("learn about: ", issue.title);
+  }
 }

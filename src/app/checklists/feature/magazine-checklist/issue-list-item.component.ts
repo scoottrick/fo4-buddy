@@ -6,6 +6,10 @@ import { MagazineIssueObject } from "../../data-access/magazine";
   templateUrl: "./issue-list-item.component.html",
   styles: [
     `
+      ::ng-deep .mat-expansion-panel-body {
+        padding-right: 16px;
+      }
+
       ::ng-deep .mat-mdc-checkbox,
       ::ng-deep .mdc-form-field {
         width: 100%;
@@ -14,6 +18,8 @@ import { MagazineIssueObject } from "../../data-access/magazine";
       ::ng-deep .mdc-label {
         flex-grow: 1;
         overflow: hidden;
+        display: flex;
+        flex-direction: row;
       }
     `,
   ],
@@ -22,4 +28,5 @@ export class IssueListItemComponent {
   @Input() issue?: MagazineIssueObject;
   @Input() collected: boolean = false;
   @Output() toggle = new EventEmitter<void>();
+  @Output() moreInfoClicked = new EventEmitter<MouseEvent>();
 }

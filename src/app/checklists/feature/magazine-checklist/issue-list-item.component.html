@@ -1,12 +1,19 @@
 <ng-container *ngIf="issue">
-  <mat-checkbox class="block" [checked]="collected" (change)="toggle.emit()">
-    <div>
-      <div class="whitespace-nowrap overflow-x-hidden text-ellipsis">
-        {{ issue.title }}
+  <div class="mb-2">
+    <mat-checkbox [checked]="collected" (change)="toggle.emit()">
+      <div class="w-full overflow-hidden flex flex-col justify-center">
+        <div
+          class="font-bold overflow-x-hidden whitespace-nowrap text-ellipsis"
+        >
+          {{ issue.title }}
+        </div>
+        <div class="whitespace-nowrap overflow-x-hidden text-ellipsis">
+          {{ issue.location.name }}
+        </div>
       </div>
-      <div>
-        {{ issue.location.name }}
-      </div>
-    </div>
-  </mat-checkbox>
+      <button mat-icon-button (click)="moreInfoClicked.emit($event)">
+        <mat-icon fontIcon="info"></mat-icon>
+      </button>
+    </mat-checkbox>
+  </div>
 </ng-container>
