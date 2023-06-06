@@ -1,15 +1,14 @@
-import { Component, EventEmitter, Input, Output, inject } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 import {
   MagazineIssueId,
   MagazineIssueObject,
   MagazineObject,
 } from "../../data-access/magazine";
-import { MagazineService } from "../../data-access/magazine.service";
 
 @Component({
   selector: "fo-magazine-list-item",
   template: `
-    <ng-container *ngIf="magazine">
+    <ng-container *ngIf="magazine && collectedIssues">
       <mat-accordion>
         <mat-expansion-panel hideToggle>
           <mat-expansion-panel-header>
@@ -19,11 +18,15 @@ import { MagazineService } from "../../data-access/magazine.service";
           </mat-expansion-panel-header>
 
           <ng-container>
+            <p>
+              Collected: {{ collectedIssues.size }} | Remaining:
+              {{ magazine.issues.length - collectedIssues.size }}
+            </p>
             <ul>
               <li *ngFor="let issue of magazine.issues">
                 <fo-issue-list-item
                   [issue]="issue"
-                  [collected]="collectedIssues?.has(issue.id) || false"
+                  [collected]="collectedIssues.has(issue.id) || false"
                   (toggle)="toggleCollectedIssue.emit(issue.id)"
                   (moreInfoClicked)="
                     showIssueDetails.emit({ event: $event, issue })
@@ -31,7 +34,6 @@ import { MagazineService } from "../../data-access/magazine.service";
                 ></fo-issue-list-item>
               </li>
             </ul>
-            <p>Collected: 0 | Remaining: {{ magazine.issues.length }}</p>
           </ng-container>
         </mat-expansion-panel>
       </mat-accordion>
