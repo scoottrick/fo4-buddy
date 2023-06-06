@@ -3,12 +3,14 @@ import { Injectable, inject } from "@angular/core";
 import { BehaviorSubject, Observable, map } from "rxjs";
 
 import { MagazineId, MagazineIssueId, MagazineObject } from "./magazine";
+import { CollectionStorageService } from "src/app/_shared/data-access/collection-storage.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class MagazineService {
   private http = inject(HttpClient);
+  private storageService = inject(CollectionStorageService);
 
   private collectedIssues = new Map<MagazineId, Set<MagazineIssueId>>();
   private magazineList: MagazineObject[] = [];
@@ -20,6 +22,10 @@ export class MagazineService {
   public magazineCollection$ = this.collectedIssuesSubject.asObservable();
 
   public fetchData() {
+    const collectedIssues = this.storageService.loadCollections().magazines;
+    this.collectedIssues = collectedIssues;
+    this.collectedIssuesSubject.next(collectedIssues);
+
     const dataUrl = "assets/data/magazines.json";
     const request$ = this.http.get<MagazineObject[]>(dataUrl);
     request$.subscribe((magazineData) => {
@@ -43,6 +49,7 @@ export class MagazineService {
     }
     this.collectedIssues.set(magazineId, issuesFromMagazine);
     this.collectedIssuesSubject.next(this.collectedIssues);
+    this.storageService.updateMagazines(this.collectedIssues);
   }
 
   public getIssuesCollectedForMagazine(
@@ -69,6 +76,7 @@ export class MagazineService {
     });
     if (hasUpdated) {
       this.collectedIssuesSubject.next(this.collectedIssues);
+      this.storageService.updateMagazines(this.collectedIssues);
     }
   }
 }
