@@ -18,6 +18,7 @@ import { CheckboxItemModule } from "../_shared/ui/checkbox-item/checkbox-item.mo
 import { MagazineListItemComponent } from "./feature/magazine-checklist/magazine-list-item.component";
 import { BobbleheadListItem } from "./feature/bobblehead-checklist/bobblehead-list-item.component";
 import { IssueListItemComponent } from "./feature/magazine-checklist/issue-list-item.component";
+import { IssueDetailsComponent } from "./feature/magazine-checklist/issue-details.component";
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { IssueListItemComponent } from "./feature/magazine-checklist/issue-list-
     MagazineChecklistComponent,
     MagazineListItemComponent,
     IssueListItemComponent,
+    IssueDetailsComponent,
   ],
   imports: [
     CommonModule,

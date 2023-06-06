@@ -25,7 +25,9 @@ import { MagazineService } from "../../data-access/magazine.service";
                   [issue]="issue"
                   [collected]="collectedIssues?.has(issue.id) || false"
                   (toggle)="toggleCollectedIssue.emit(issue.id)"
-                  (moreInfoClicked)="showIssueDetails(issue)"
+                  (moreInfoClicked)="
+                    showIssueDetails.emit({ event: $event, issue })
+                  "
                 ></fo-issue-list-item>
               </li>
             </ul>
@@ -41,8 +43,8 @@ export class MagazineListItemComponent {
   @Input() magazine?: MagazineObject;
   @Input() collectedIssues?: Set<MagazineIssueId>;
   @Output() toggleCollectedIssue = new EventEmitter<MagazineIssueId>();
-
-  showIssueDetails(issue: MagazineIssueObject) {
-    console.log("learn about: ", issue.title);
-  }
+  @Output() showIssueDetails = new EventEmitter<{
+    event: MouseEvent;
+    issue: MagazineIssueObject;
+  }>();
 }
