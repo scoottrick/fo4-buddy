@@ -1,5 +1,9 @@
 <ng-container *ngIf="vm$ | async as vm">
-  <ul class="p-4">
+  <fo-bobblehead-collection-stats
+    [total]="vm.bobbleheads.length"
+    [collected]="vm.bobbleheadCollection.size"
+  ></fo-bobblehead-collection-stats>
+  <ul class="px-4">
     <li class="mb-2" *ngFor="let bobblehead of vm.bobbleheads">
       <fo-bobblehead-list-item
         [bobblehead]="bobblehead"
