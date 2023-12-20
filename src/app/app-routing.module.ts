@@ -36,7 +36,7 @@ const routes: Routes = [
       { path: "**", redirectTo: "/collections/bobbleheads" },
     ],
   },
-  { path: "**", redirectTo: "/checklists" },
+  { path: "**", redirectTo: "/collections" },
 ];
 
 @NgModule({
