@@ -23,7 +23,7 @@ export class StatItemComponent {
 
 @Component({
   selector: "fo-bobblehead-collection-stats",
-  template: ` <ng-container *ngIf="total && collected">
+  template: ` <ng-container>
     <div class="p-4 flex flex-row justify-evenly">
       <fo-stat-item label="Total" [value]="total"></fo-stat-item>
       <fo-stat-item label="Collected" [value]="collected"></fo-stat-item>
@@ -43,6 +43,6 @@ export class StatItemComponent {
   ],
 })
 export class BobbleheadCollectionStatsComponent {
-  @Input() total?: number;
-  @Input() collected?: number;
+  @Input() total: number = 0;
+  @Input() collected: number = 0;
 }
