@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from "@angular/core";
-import { combineLatest } from "rxjs";
+import { combineLatest, map } from "rxjs";
 
 import { MagazineService } from "../../data-access/magazine.service";
 import {
@@ -32,7 +32,14 @@ export class MagazineChecklistComponent implements OnInit {
   private dialog = inject(MatDialog);
 
   vm$ = combineLatest({
-    magazines: this.magazineService.magazines$,
+    magazines: this.magazineService.magazines$.pipe(
+      map((magazineData) => {
+        const sorted = magazineData.sort((a, b) =>
+          a.title.localeCompare(b.title)
+        );
+        return sorted;
+      })
+    ),
     magazineCollection: this.magazineService.magazineCollection$,
   });
 
