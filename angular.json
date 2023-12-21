@@ -88,10 +88,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "fo4-buddy:build:production"
+              "buildTarget": "fo4-buddy:build:production"
             },
             "development": {
-              "browserTarget": "fo4-buddy:build:development"
+              "buildTarget": "fo4-buddy:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -99,7 +99,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "fo4-buddy:build"
+            "buildTarget": "fo4-buddy:build"
           }
         }
       }
