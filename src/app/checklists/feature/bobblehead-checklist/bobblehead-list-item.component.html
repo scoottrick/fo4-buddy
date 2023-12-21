@@ -12,10 +12,12 @@
         <ng-container *ngIf="!collected">
           <span>
             <div class="text-lg">{{ bobblehead.name }}</div>
-            <div class="text-gray-300">
-              &#x2022; {{ bobblehead.location.name }}
+            <div class="text-gray-200 text-sm">
+              {{ bobblehead.location.name }}
             </div>
-            <div class="text-gray-300">&#x2022; {{ bobblehead.effect }}</div>
+            <div class="text-gray-200 text-sm">
+              {{ bobblehead.effect }}
+            </div>
           </span>
         </ng-container>
       </mat-panel-title>
