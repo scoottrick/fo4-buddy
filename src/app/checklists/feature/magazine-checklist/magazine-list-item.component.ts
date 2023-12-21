@@ -12,12 +12,12 @@ import {
       <mat-accordion>
         <mat-expansion-panel hideToggle>
           <mat-expansion-panel-header
-            collapsedHeight="6em"
-            expandedHeight="6em"
+            collapsedHeight="5em"
+            expandedHeight="5em"
           >
             <mat-panel-title>
               <span>
-                <div class="text-lg">{{ magazine.title }}</div>
+                <div class="text-base">{{ magazine.title }}</div>
                 <div class="text-xs text-gray-200">
                   Collected: {{ collectedIssues.size }} | Remaining:
                   {{ magazine.issues.length - collectedIssues.size }}
