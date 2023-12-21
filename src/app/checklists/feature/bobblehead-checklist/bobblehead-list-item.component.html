@@ -1,8 +1,8 @@
 <ng-container *ngIf="bobblehead">
   <mat-expansion-panel>
     <mat-expansion-panel-header
-      [collapsedHeight]="collected ? '4em' : '8em'"
-      [expandedHeight]="collected ? '4em' : '8em'"
+      [collapsedHeight]="collected ? '4em' : '7em'"
+      [expandedHeight]="collected ? '4em' : '7em'"
     >
       <mat-panel-title>
         <ng-container *ngIf="collected">
@@ -12,10 +12,10 @@
         <ng-container *ngIf="!collected">
           <span>
             <div class="text-lg">{{ bobblehead.name }}</div>
-            <div class="text-gray-200 text-sm">
+            <div class="text-gray-200 text-xs">
               {{ bobblehead.location.name }}
             </div>
-            <div class="text-gray-200 text-sm">
+            <div class="text-gray-200 text-xs">
               {{ bobblehead.effect }}
             </div>
           </span>
