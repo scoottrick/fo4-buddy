@@ -11,18 +11,23 @@ import {
     <ng-container *ngIf="magazine && collectedIssues">
       <mat-accordion>
         <mat-expansion-panel hideToggle>
-          <mat-expansion-panel-header>
+          <mat-expansion-panel-header
+            collapsedHeight="6em"
+            expandedHeight="6em"
+          >
             <mat-panel-title>
-              {{ magazine.title }}
+              <span>
+                <div class="text-lg">{{ magazine.title }}</div>
+                <div class="text-xs text-gray-200">
+                  Collected: {{ collectedIssues.size }} | Remaining:
+                  {{ magazine.issues.length - collectedIssues.size }}
+                </div>
+              </span>
             </mat-panel-title>
           </mat-expansion-panel-header>
 
           <ng-container>
-            <p>
-              Collected: {{ collectedIssues.size }} | Remaining:
-              {{ magazine.issues.length - collectedIssues.size }}
-            </p>
-            <ul>
+            <ul class="py-1 px-3">
               <li *ngFor="let issue of magazine.issues">
                 <fo-issue-list-item
                   [issue]="issue"
@@ -39,7 +44,13 @@ import {
       </mat-accordion>
     </ng-container>
   `,
-  styles: [],
+  styles: [
+    `
+      ::ng-deep .mat-expansion-panel-body {
+        padding: 0 !important;
+      }
+    `,
+  ],
 })
 export class MagazineListItemComponent {
   @Input() magazine?: MagazineObject;
