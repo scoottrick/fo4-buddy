@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from "@angular/core";
-import { combineLatest } from "rxjs";
+import { combineLatest, map } from "rxjs";
 
 import { BobbleheadService } from "../../data-access/bobblehead.service";
 import { BobbleheadId } from "../../data-access/bobblehead";

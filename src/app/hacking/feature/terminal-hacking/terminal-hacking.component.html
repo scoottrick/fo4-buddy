@@ -1,34 +1,44 @@
-<ng-container *ngIf="true">
-  <div class="text-right">
-    <button mat-icon-button [matMenuTriggerFor]="menu">
-      <mat-icon fontIcon="more_horiz"></mat-icon>
-    </button>
-    <mat-menu #menu>
-      <button mat-menu-item (click)="clearPreviousAttempts()">
-        Reset attempts
+<main class="flex flex-col h-full w-full">
+  <header>
+    <fo-app-toolbar
+      >Terminal Hacker
+      <span toolbar-controls>
+        <a mat-icon-button routerLink="/collections"
+          ><mat-icon fontIcon="checklist"></mat-icon
+        ></a> </span
+    ></fo-app-toolbar>
+  </header>
+
+  <section class="shrink grow overflow-scroll">
+    <div class="text-right">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon fontIcon="more_horiz"></mat-icon>
       </button>
-      <button mat-menu-item (click)="clearPasswords()">Reset passwords</button>
-    </mat-menu>
-  </div>
-
-  <div class="max-w-2xl mx-auto pb-4 px-4">
-    <fo-new-passwords (wordsAdded)="addPasswords($event)"></fo-new-passwords>
-
-    <fo-password-picker
-      [passwords]="vm.availablePasswords"
-      [selectedWord]="vm.selectedPassword"
-      (wordSelected)="changeSelectedPassword($event)"
-    ></fo-password-picker>
-
-    <fo-current-attempt
-      [password]="vm.selectedPassword"
-      (attemptSubmitted)="addNewAttempt($event)"
-    ></fo-current-attempt>
-
-    <fo-previous-attempts
-      [attempts]="vm.previousAttempts"
-      (attemptRemoved)="removeHackingAttempt($event)"
-    >
-    </fo-previous-attempts>
-  </div>
-</ng-container>
+      <mat-menu #menu>
+        <button mat-menu-item (click)="clearPreviousAttempts()">
+          Reset attempts
+        </button>
+        <button mat-menu-item (click)="clearPasswords()">
+          Reset passwords
+        </button>
+      </mat-menu>
+    </div>
+    <div class="max-w-2xl mx-auto pb-4 px-4">
+      <fo-new-passwords (wordsAdded)="addPasswords($event)"></fo-new-passwords>
+      <fo-password-picker
+        [passwords]="vm.availablePasswords"
+        [selectedWord]="vm.selectedPassword"
+        (wordSelected)="changeSelectedPassword($event)"
+      ></fo-password-picker>
+      <fo-current-attempt
+        [password]="vm.selectedPassword"
+        (attemptSubmitted)="addNewAttempt($event)"
+      ></fo-current-attempt>
+      <fo-previous-attempts
+        [attempts]="vm.previousAttempts"
+        (attemptRemoved)="removeHackingAttempt($event)"
+      >
+      </fo-previous-attempts>
+    </div>
+  </section>
+</main>

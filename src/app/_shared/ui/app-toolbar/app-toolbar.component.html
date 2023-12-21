@@ -1,0 +1,17 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row class="flex flex-row">
+    <span class="grow"><ng-content></ng-content></span>
+    <ng-content select="[toolbar-controls]"></ng-content>
+    <!-- <nav>
+      <button mat-icon-button routerLink="/hacking">
+        <mat-icon fontIcon="terminal"></mat-icon>
+      </button>
+      <button mat-icon-button routerLink="/checklists">
+        <mat-icon fontIcon="checklist"></mat-icon>
+      </button>
+      <button mat-icon-button>
+        <mat-icon fontIcon="settings"></mat-icon>
+      </button>
+    </nav> -->
+  </mat-toolbar-row>
+</mat-toolbar>

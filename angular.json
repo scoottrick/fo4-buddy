@@ -49,13 +49,16 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "@angular/material/prebuilt-themes/purple-green.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "serviceWorker": true,
+            "ngswConfigPath": "ngsw-config.json"
           },
           "configurations": {
             "production": {
@@ -88,10 +91,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "fo4-buddy:build:production"
+              "buildTarget": "fo4-buddy:build:production"
             },
             "development": {
-              "browserTarget": "fo4-buddy:build:development"
+              "buildTarget": "fo4-buddy:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -99,7 +102,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "fo4-buddy:build"
+            "buildTarget": "fo4-buddy:build"
           }
         }
       }

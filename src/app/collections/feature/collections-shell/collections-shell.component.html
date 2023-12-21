@@ -1,0 +1,31 @@
+<main class="flex flex-col w-full h-full justify-center">
+  <header>
+    <fo-app-toolbar>
+      Collections
+      <span toolbar-controls>
+        <a mat-icon-button routerLink="/hacking"
+          ><mat-icon fontIcon="terminal"></mat-icon
+        ></a>
+      </span>
+    </fo-app-toolbar>
+  </header>
+  <section class="shrink grow overflow-scroll">
+    <mat-tab-nav-panel #tabPanel>
+      <router-outlet></router-outlet>
+    </mat-tab-nav-panel>
+  </section>
+  <footer>
+    <nav mat-tab-nav-bar backgroundColor="primary" [tabPanel]="tabPanel">
+      <ng-container *ngFor="let tab of tabs">
+        <a
+          mat-tab-link
+          routerLinkActive
+          #rla="routerLinkActive"
+          [routerLink]="tab.link"
+          [active]="rla.isActive"
+          >{{ tab.text }}</a
+        >
+      </ng-container>
+    </nav>
+  </footer>
+</main>

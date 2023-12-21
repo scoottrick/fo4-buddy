@@ -20,6 +20,10 @@ import { BobbleheadListItem } from "./feature/bobblehead-checklist/bobblehead-li
 import { IssueListItemComponent } from "./feature/magazine-checklist/issue-list-item.component";
 import { IssueDetailsComponent } from "./feature/magazine-checklist/issue-details.component";
 import { SharedModule } from "../_shared/shared.module";
+import {
+  BobbleheadCollectionStatsComponent,
+  StatItemComponent,
+} from "./feature/bobblehead-checklist/bobblehead-collection-stats.component";
 
 @NgModule({
   declarations: [
@@ -30,6 +34,8 @@ import { SharedModule } from "../_shared/shared.module";
     MagazineListItemComponent,
     IssueListItemComponent,
     IssueDetailsComponent,
+    BobbleheadCollectionStatsComponent,
+    StatItemComponent,
   ],
   imports: [
     CommonModule,

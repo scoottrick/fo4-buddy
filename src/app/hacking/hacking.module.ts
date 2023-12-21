@@ -15,6 +15,7 @@ import { NewPasswordsComponent } from "./ui/new-passwords/new-passwords.componen
 import { PreviousAttemptsComponent } from "./ui/previous-attempts/previous-attempts.component";
 import { CurrentAttemptComponent } from "./ui/current-attempt/current-attempt.component";
 import { PasswordPickerComponent } from "./ui/password-picker/password-picker.component";
+import { SharedModule } from "../_shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -26,12 +27,11 @@ import { PasswordPickerComponent } from "./ui/password-picker/password-picker.co
   ],
   imports: [
     CommonModule,
+    SharedModule,
     ReactiveFormsModule,
     MatChipsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule,
-    MatIconModule,
     MatListModule,
     MatMenuModule,
   ],
