@@ -13,7 +13,14 @@ export class BobbleheadChecklistComponent implements OnInit {
   private bobbleheadService = inject(BobbleheadService);
 
   vm$ = combineLatest({
-    bobbleheads: this.bobbleheadService.bobbleheads$,
+    bobbleheads: this.bobbleheadService.bobbleheads$.pipe(
+      map((bobblheadData) => {
+        const sorted = bobblheadData.sort((a, b) =>
+          a.name.localeCompare(b.name)
+        );
+        return sorted;
+      })
+    ),
     bobbleheadCollection: this.bobbleheadService.bobbleheadCollection$,
   });
 
