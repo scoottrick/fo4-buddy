@@ -14,6 +14,7 @@ export class CollectionsShellComponent implements OnInit {
   }
 
   tabs = <{ link: string; text: string }[]>[
+    { link: "/collections/companions", text: "Companions" },
     { link: "/collections/bobbleheads", text: "Bobbleheads" },
     { link: "/collections/magazines", text: "Magazines" },
   ];
