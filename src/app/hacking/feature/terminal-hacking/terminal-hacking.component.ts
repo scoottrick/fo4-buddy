@@ -63,7 +63,10 @@ export class TerminalHackingComponent {
   }
 
   addPasswords(newWords: string[]) {
-    const uniquePasswords = new Set([...this.vm.passwords, ...newWords]);
+    const uniquePasswords = new Set([
+      ...this.vm.passwords,
+      ...newWords.map((word) => word.toLowerCase()),
+    ]);
     const passwords = Array.from(uniquePasswords);
     this.updateView({
       passwords,
