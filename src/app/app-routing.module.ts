@@ -5,6 +5,7 @@ import { TerminalHackingComponent } from "./hacking/feature/terminal-hacking/ter
 import { CollectionsShellComponent } from "./collections/feature/collections-shell/collections-shell.component";
 import { BobbleheadChecklistComponent } from "./checklists/feature/bobblehead-checklist/bobblehead-checklist.component";
 import { MagazineChecklistComponent } from "./checklists/feature/magazine-checklist/magazine-checklist.component";
+import { CompanionListComponent } from "./checklists/feature/companion-list/companion-list.component";
 
 const routes: Routes = [
   {
@@ -26,6 +27,11 @@ const routes: Routes = [
         path: "magazines",
         title: "Magazines",
         component: MagazineChecklistComponent,
+      },
+      {
+        path: "companions",
+        title: "Companions",
+        component: CompanionListComponent,
       },
       { path: "**", redirectTo: "/collections/bobbleheads" },
     ],

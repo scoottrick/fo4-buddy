@@ -21,6 +21,7 @@ interface QuestItem extends WikiItem {}
 
 export interface CompanionObject {
   id: CompanionId;
+  name: string;
   url: string;
   locations: LocationItem[];
   perk: PerkItem;
