@@ -24,6 +24,7 @@ import {
   BobbleheadCollectionStatsComponent,
   StatItemComponent,
 } from "./feature/bobblehead-checklist/bobblehead-collection-stats.component";
+import { WikiUrlPipe } from "../_shared/ui/wiki-url.pipe";
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import {
     MatCheckboxModule,
     MatDialogModule,
     SharedModule,
+    WikiUrlPipe,
   ],
 })
 export class ChecklistsModule {}

@@ -28,14 +28,18 @@
         <mat-icon fontIcon="done"></mat-icon>
         <div>{{ collected ? "Collected" : "Collect" }}</div>
       </button>
-      <a class="flex-1 text-center" target="_blank" [href]="bobblehead.url">
+      <a
+        class="flex-1 text-center"
+        target="_blank"
+        [href]="bobblehead.url | wikiUrl"
+      >
         <mat-icon fontIcon="info"></mat-icon>
         <div>Details</div>
       </a>
       <a
         class="flex-1 text-center"
         target="_blank"
-        [href]="bobblehead.location.url"
+        [href]="bobblehead.location.url | wikiUrl"
       >
         <mat-icon fontIcon="travel_explore"></mat-icon>
         <div>Location</div>

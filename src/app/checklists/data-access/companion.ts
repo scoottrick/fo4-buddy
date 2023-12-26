@@ -1,3 +1,10 @@
+import {
+  CompanionPerk,
+  CompanionQuest,
+  WikiItem,
+  WorldLocation,
+} from "src/app/_shared/data-access/wiki";
+
 export type CompanionId = number;
 
 interface CharacterSpecials {
@@ -10,23 +17,12 @@ interface CharacterSpecials {
   luck: number;
 }
 
-interface WikiItem {
-  name: string;
-  url: string;
-}
-
-interface LocationItem extends WikiItem {}
-interface PerkItem extends WikiItem {}
-interface QuestItem extends WikiItem {}
-
-export interface CompanionObject {
+export type CompanionObject = WikiItem & {
   id: CompanionId;
-  name: string;
-  url: string;
-  locations: LocationItem[];
-  perk: PerkItem;
+  locations: WorldLocation[];
+  perk: CompanionPerk;
   prereq: string;
-  quest: QuestItem;
+  quest: CompanionQuest;
   romance: boolean;
   specials: CharacterSpecials[];
-}
+};
