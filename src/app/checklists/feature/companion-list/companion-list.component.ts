@@ -10,7 +10,7 @@ import { CommonModule } from "@angular/common";
     <ul>
       <li class="py-4 px-8" *ngFor="let companion of companions()">
         <div class="text-xl">{{ companion.name }}</div>
-        <div *ngIf="companion.perk.name !== '-'">
+        <div *ngIf="companion.perk && companion.perk.name !== '-'">
           <div>Perk: {{ companion.perk.name }}</div>
           <div>{{ companion.perk.url }}</div>
         </div>
