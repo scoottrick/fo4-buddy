@@ -25,6 +25,7 @@ import {
   StatItemComponent,
 } from "./feature/bobblehead-checklist/bobblehead-collection-stats.component";
 import { WikiUrlPipe } from "../_shared/ui/wiki-url.pipe";
+import { CompanionListComponent } from "./feature/companion-list/companion-list.component";
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { WikiUrlPipe } from "../_shared/ui/wiki-url.pipe";
     IssueDetailsComponent,
     BobbleheadCollectionStatsComponent,
     StatItemComponent,
+    CompanionListComponent,
   ],
   imports: [
     CommonModule,

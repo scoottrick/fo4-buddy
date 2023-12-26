@@ -20,9 +20,9 @@ interface CharacterSpecials {
 export type CompanionObject = WikiItem & {
   id: CompanionId;
   locations: WorldLocation[];
-  perk?: CompanionPerk;
-  prereq: string;
-  quest: CompanionQuest;
-  romance: boolean;
   specials: CharacterSpecials[];
+  requirements: string;
+  romance: boolean;
+  perk?: CompanionPerk;
+  quest?: CompanionQuest;
 };

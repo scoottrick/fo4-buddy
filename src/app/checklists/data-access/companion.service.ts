@@ -1,14 +1,6 @@
 import { HttpClient } from "@angular/common/http";
-import {
-  Injectable,
-  WritableSignal,
-  computed,
-  inject,
-  signal,
-} from "@angular/core";
-import { toSignal } from "@angular/core/rxjs-interop";
+import { Injectable, WritableSignal, inject, signal } from "@angular/core";
 import { CompanionObject } from "./companion";
-import { Observable } from "rxjs";
 
 @Injectable({ providedIn: "root" })
 export class CompanionService {
@@ -21,7 +13,6 @@ export class CompanionService {
   }
 
   public fetchData() {
-    console.log("what");
     const dataUrl = "assets/data/companions.json";
     const request$ = this.http.get<CompanionObject[]>(dataUrl);
     request$.subscribe((data) => {
