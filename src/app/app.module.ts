@@ -4,7 +4,6 @@ import { BrowserModule } from "@angular/platform-browser";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { HackingModule } from "./hacking/hacking.module";
-import { ChecklistsModule } from "./checklists/checklists.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatButtonModule } from "@angular/material/button";
@@ -13,6 +12,7 @@ import { CollectionsModule } from "./collections/collections.module";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { MagazinesModule } from "./magazines/magazines.module";
 import { CompanionsModule } from "./companions/companions.module";
+import { BobbleheadsModule } from "./bobbleheads/bobbleheads.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +22,7 @@ import { CompanionsModule } from "./companions/companions.module";
     HackingModule,
     MagazinesModule,
     CompanionsModule,
+    BobbleheadsModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule,

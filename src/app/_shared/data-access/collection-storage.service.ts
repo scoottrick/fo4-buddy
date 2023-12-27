@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
-import { BobbleheadId } from "src/app/checklists/data-access/bobblehead";
+import { BobbleheadId } from "src/app/bobbleheads/data-access/bobblehead";
 import {
   MagazineId,
   MagazineIssueId,
-} from "src/app/checklists/data-access/magazine";
+} from "src/app/magazines/data-access/magazine";
 
 const bobbleheadTag = "fo:bobbles:";
 const magazineTag = "fo:mags:";

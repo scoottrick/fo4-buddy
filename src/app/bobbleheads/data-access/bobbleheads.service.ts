@@ -8,7 +8,7 @@ import { CollectionStorageService } from "src/app/_shared/data-access/collection
 @Injectable({
   providedIn: "root",
 })
-export class BobbleheadService {
+export class BobbleheadsService {
   private http = inject(HttpClient);
   private storageService = inject(CollectionStorageService);
 

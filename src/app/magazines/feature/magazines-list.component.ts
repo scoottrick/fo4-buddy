@@ -14,8 +14,8 @@ import { IssueDetailsComponent } from "./issue-details.component";
 @Component({
   selector: "fo-magazines-list",
   template: `<ng-container *ngIf="vm$ | async as vm">
-    <ul class="p-4">
-      <li class="mb-2" *ngFor="let magazine of vm.magazines">
+    <ul>
+      <li class="mb-2 last:mb-0" *ngFor="let magazine of vm.magazines">
         <fo-magazine-list-item
           [magazine]="magazine"
           [collectedIssues]="vm.magazineCollection.get(magazine.id)"
