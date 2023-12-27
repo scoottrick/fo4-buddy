@@ -18,13 +18,6 @@ type BobbleheadStorageObject = BobbleheadId[];
   providedIn: "root",
 })
 export class CollectionStorageService {
-  loadCollections() {
-    return {
-      bobbleheads: this.loadBobbleheadCollection(),
-      magazines: this.loadMagazineCollection(),
-    };
-  }
-
   loadMagazines() {
     return this.loadMagazineCollection();
   }

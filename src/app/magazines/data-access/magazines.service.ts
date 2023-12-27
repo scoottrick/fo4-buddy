@@ -1,8 +1,9 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable, inject } from "@angular/core";
+import { Injectable, inject, signal } from "@angular/core";
 import { CollectionStorageService } from "src/app/_shared/data-access/collection-storage.service";
 import { MagazineId, MagazineIssueId, MagazineObject } from "./magazine";
-import { BehaviorSubject, Observable, map } from "rxjs";
+
+type MagazineCollection = Map<MagazineId, Set<MagazineIssueId>>;
 
 @Injectable({
   providedIn: "root",
@@ -11,19 +12,23 @@ export class MagazinesService {
   private http = inject(HttpClient);
   private storageService = inject(CollectionStorageService);
 
-  private collectedIssues = new Map<MagazineId, Set<MagazineIssueId>>();
-  private magazineList: MagazineObject[] = [];
+  private collection: MagazineCollection = new Map();
 
-  private collectedIssuesSubject = new BehaviorSubject(this.collectedIssues);
-  private magazineSubject = new BehaviorSubject(this.magazineList);
+  private listSignal = signal<MagazineObject[]>([]);
+  private collectionSignal = signal<MagazineCollection>(this.collection);
 
-  public magazines$ = this.magazineSubject.asObservable();
-  public magazineCollection$ = this.collectedIssuesSubject.asObservable();
+  getList() {
+    return this.listSignal.asReadonly();
+  }
+
+  getCollection() {
+    return this.collectionSignal.asReadonly();
+  }
 
   public fetchData() {
-    const collectedIssues = this.storageService.loadCollections().magazines;
-    this.collectedIssues = collectedIssues;
-    this.collectedIssuesSubject.next(collectedIssues);
+    const collectedIssues = this.storageService.loadMagazines();
+    this.collection = collectedIssues;
+    this.collectionSignal.set(collectedIssues);
 
     const dataUrl = "assets/data/magazines.json";
     const request$ = this.http.get<MagazineObject[]>(dataUrl);
@@ -36,7 +41,7 @@ export class MagazinesService {
     magazineId: MagazineId,
     issueId: MagazineIssueId
   ) {
-    const issuesFromMagazine = this.collectedIssues.get(magazineId);
+    const issuesFromMagazine = this.collection.get(magazineId);
     if (!issuesFromMagazine) {
       return;
     }
@@ -46,36 +51,24 @@ export class MagazinesService {
     } else {
       issuesFromMagazine.add(issueId);
     }
-    this.collectedIssues.set(magazineId, issuesFromMagazine);
-    this.collectedIssuesSubject.next(this.collectedIssues);
-    this.storageService.updateMagazines(this.collectedIssues);
-  }
-
-  public getIssuesCollectedForMagazine(
-    magazineId: MagazineId
-  ): Observable<MagazineIssueId[]> {
-    return this.magazineCollection$.pipe(
-      map((magazineCollection) => {
-        const collectedIssues = magazineCollection?.get(magazineId);
-        return Array.from(collectedIssues || []);
-      })
-    );
+    this.collection.set(magazineId, issuesFromMagazine);
+    this.collectionSignal.set(this.collection);
+    this.storageService.updateMagazines(this.collection);
   }
 
   private updateMagazineList(newList: MagazineObject[]) {
-    this.magazineList = newList;
-    this.magazineSubject.next(newList);
+    this.listSignal.set(newList);
     let hasUpdated = false;
     newList.forEach((newMagazine) => {
-      if (this.collectedIssues.has(newMagazine.id)) {
+      if (this.collection.has(newMagazine.id)) {
         return;
       }
-      this.collectedIssues.set(newMagazine.id, new Set());
+      this.collection.set(newMagazine.id, new Set());
       hasUpdated = true;
     });
     if (hasUpdated) {
-      this.collectedIssuesSubject.next(this.collectedIssues);
-      this.storageService.updateMagazines(this.collectedIssues);
+      this.collectionSignal.set(this.collection);
+      this.storageService.updateMagazines(this.collection);
     }
   }
 }
