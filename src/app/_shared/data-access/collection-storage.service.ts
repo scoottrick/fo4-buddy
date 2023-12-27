@@ -25,6 +25,14 @@ export class CollectionStorageService {
     };
   }
 
+  loadMagazines() {
+    return this.loadMagazineCollection();
+  }
+
+  loadBobbleheads() {
+    return this.loadBobbleheadCollection();
+  }
+
   updateBobbleheads(bobbleheads: BobbleheadCollection) {
     this.storeBobbleheadCollection(bobbleheads);
   }

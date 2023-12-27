@@ -1,6 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable, inject } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
+import { Injectable, inject, signal } from "@angular/core";
 
 import { BobbleheadId, BobbleheadObject } from "./bobblehead";
 import { CollectionStorageService } from "src/app/_shared/data-access/collection-storage.service";
@@ -12,57 +11,58 @@ export class BobbleheadsService {
   private http = inject(HttpClient);
   private storageService = inject(CollectionStorageService);
 
-  private bobbleheadList: BobbleheadObject[] = [];
-  private bobbleheadCollection = new Set<BobbleheadId>();
+  private bobbleheadsSignal = signal<BobbleheadObject[]>([]);
 
-  private bobbleheadSubject = new BehaviorSubject(this.bobbleheadList);
-  private bobbleheadCollectionSubject = new BehaviorSubject(
-    this.bobbleheadCollection
-  );
+  private collection = new Set<BobbleheadId>([]);
+  private collectionSignal = signal<Set<BobbleheadId>>(this.collection);
 
-  public bobbleheads$ = this.bobbleheadSubject.asObservable();
-  public bobbleheadCollection$ =
-    this.bobbleheadCollectionSubject.asObservable();
+  getBobbleheads() {
+    return this.bobbleheadsSignal.asReadonly();
+  }
+
+  getCollection() {
+    return this.collectionSignal.asReadonly();
+  }
 
   public fetchData() {
-    const collectedBobbleheads =
-      this.storageService.loadCollections().bobbleheads;
-    this.bobbleheadCollection = collectedBobbleheads;
-    this.bobbleheadCollectionSubject.next(collectedBobbleheads);
+    const collectedBobbleheads = this.storageService.loadBobbleheads();
+    this.collection = collectedBobbleheads;
+    this.collectionSignal.set(this.collection);
 
     const dataUrl = "assets/data/bobbleheads.json";
     const request$ = this.http.get<BobbleheadObject[]>(dataUrl);
     request$.subscribe((bobbleheadData) => {
-      this.updateBobbleheadList(bobbleheadData);
+      if (Array.isArray(bobbleheadData)) {
+        this.bobbleheadsSignal.set(bobbleheadData);
+        this.updateBobbleheadList(bobbleheadData);
+      }
     });
   }
 
   private updateBobbleheadList(newList: BobbleheadObject[]) {
-    this.bobbleheadList = newList;
-    this.bobbleheadSubject.next(newList);
-
     const removedBobbleheads: BobbleheadId[] = [];
-    this.bobbleheadCollection.forEach((collectedId) => {
-      if (!newList.some((newBobblehead) => newBobblehead.id === collectedId)) {
-        removedBobbleheads.push(collectedId);
+    this.collection.forEach((collectedId) => {
+      if (newList.some((bobblehead) => bobblehead.id === collectedId)) {
+        return;
       }
+      removedBobbleheads.push(collectedId);
     });
     if (!removedBobbleheads.length) {
       return;
     }
-    removedBobbleheads.forEach((id) => this.bobbleheadCollection.delete(id));
-    this.bobbleheadCollectionSubject.next(this.bobbleheadCollection);
-    this.storageService.updateBobbleheads(this.bobbleheadCollection);
+    removedBobbleheads.forEach((id) => this.collection.delete(id));
+    this.collectionSignal.set(this.collection);
+    this.storageService.updateBobbleheads(this.collection);
   }
 
   public toggleFromCollection(bobbleheadId: BobbleheadId) {
-    const isCollected = this.bobbleheadCollection.has(bobbleheadId);
+    const isCollected = this.collection.has(bobbleheadId);
     if (isCollected) {
-      this.bobbleheadCollection.delete(bobbleheadId);
+      this.collection.delete(bobbleheadId);
     } else {
-      this.bobbleheadCollection.add(bobbleheadId);
+      this.collection.add(bobbleheadId);
     }
-    this.bobbleheadCollectionSubject.next(this.bobbleheadCollection);
-    this.storageService.updateBobbleheads(this.bobbleheadCollection);
+    this.collectionSignal.set(this.collection);
+    this.storageService.updateBobbleheads(this.collection);
   }
 }
