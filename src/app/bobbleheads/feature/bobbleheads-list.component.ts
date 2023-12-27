@@ -1,5 +1,4 @@
 import { Component, computed, inject } from "@angular/core";
-import { combineLatest, map } from "rxjs";
 
 import { BobbleheadsService } from "../data-access/bobbleheads.service";
 import { BobbleheadId, BobbleheadObject } from "../data-access/bobblehead";
