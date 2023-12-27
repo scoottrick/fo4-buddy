@@ -25,4 +25,5 @@ export type CompanionObject = WikiItem & {
   romance: boolean;
   perk?: CompanionPerk;
   quest?: CompanionQuest;
+  interestsUrl?: string;
 };

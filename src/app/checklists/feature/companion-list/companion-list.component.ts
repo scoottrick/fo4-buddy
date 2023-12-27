@@ -55,6 +55,12 @@ import { CompanionService } from "../../data-access/companion.service";
             />
           </div>
         </div>
+        <div *ngIf="companion.interestsUrl" class="text-sm mt-1">
+          <fo-text-link
+            text="Likes/Dislikes"
+            href="{{ companion.url + companion.interestsUrl | wikiUrl }}"
+          />
+        </div>
       </li>
     </ul>
   `,
