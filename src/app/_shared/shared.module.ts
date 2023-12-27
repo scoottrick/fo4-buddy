@@ -9,10 +9,19 @@ import { MatIconModule } from "@angular/material/icon";
 import { RouterModule } from "@angular/router";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { WikiUrlPipe } from "./pipes/wiki-url.pipe";
+import { HttpClientModule } from "@angular/common/http";
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
   declarations: [TextLinkComponent, AppToolbarComponent, WikiUrlPipe],
-  imports: [CommonModule, MatButtonModule, MatToolbarModule, MatIconModule],
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatDialogModule,
+  ],
   exports: [
     TextLinkComponent,
     AppToolbarComponent,
