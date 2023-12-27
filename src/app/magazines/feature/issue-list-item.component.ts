@@ -3,7 +3,27 @@ import { MagazineIssueObject } from "../data-access/magazine";
 
 @Component({
   selector: "fo-issue-list-item",
-  templateUrl: "./issue-list-item.component.html",
+  template: `<ng-container *ngIf="issue">
+    <div class="mb-2">
+      <mat-checkbox [checked]="collected" (change)="toggle.emit()">
+        <div class="w-full overflow-hidden flex flex-col justify-center">
+          <div
+            class="font-bold overflow-x-hidden whitespace-nowrap text-ellipsis"
+          >
+            {{ issue.title }}
+          </div>
+          <div
+            class="whitespace-nowrap overflow-x-hidden text-ellipsis text-xs text-gray-200"
+          >
+            {{ issue.location.name }}
+          </div>
+        </div>
+        <button mat-icon-button (click)="moreInfoClicked.emit($event)">
+          <mat-icon fontIcon="info"></mat-icon>
+        </button>
+      </mat-checkbox>
+    </div>
+  </ng-container> `,
   styles: [
     `
       ::ng-deep .mat-expansion-panel-body {
