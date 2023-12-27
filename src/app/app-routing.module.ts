@@ -4,8 +4,8 @@ import { RouterModule, Routes } from "@angular/router";
 import { TerminalHackingComponent } from "./hacking/feature/terminal-hacking/terminal-hacking.component";
 import { CollectionsShellComponent } from "./collections/feature/collections-shell/collections-shell.component";
 import { BobbleheadChecklistComponent } from "./checklists/feature/bobblehead-checklist/bobblehead-checklist.component";
-import { MagazineChecklistComponent } from "./checklists/feature/magazine-checklist/magazine-checklist.component";
 import { CompanionsListComponent } from "./companions/feature/companions-list/companions-list.component";
+import { MagazinesListComponent } from "./magazines/feature/magazines-list.component";
 
 const routes: Routes = [
   {
@@ -26,7 +26,7 @@ const routes: Routes = [
       {
         path: "magazines",
         title: "Magazines",
-        component: MagazineChecklistComponent,
+        component: MagazinesListComponent,
       },
       {
         path: "companions",

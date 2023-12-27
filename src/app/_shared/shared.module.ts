@@ -11,6 +11,7 @@ import { MatExpansionModule } from "@angular/material/expansion";
 import { WikiUrlPipe } from "./pipes/wiki-url.pipe";
 import { HttpClientModule } from "@angular/common/http";
 import { MatDialogModule } from "@angular/material/dialog";
+import { MatCheckboxModule } from "@angular/material/checkbox";
 
 @NgModule({
   declarations: [TextLinkComponent, AppToolbarComponent, WikiUrlPipe],
@@ -20,7 +21,6 @@ import { MatDialogModule } from "@angular/material/dialog";
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
-    MatDialogModule,
   ],
   exports: [
     TextLinkComponent,
@@ -28,6 +28,8 @@ import { MatDialogModule } from "@angular/material/dialog";
     MatButtonModule,
     MatIconModule,
     MatExpansionModule,
+    MatDialogModule,
+    MatCheckboxModule,
     RouterModule,
     WikiUrlPipe,
   ],

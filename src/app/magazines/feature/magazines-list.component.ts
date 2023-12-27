@@ -1,18 +1,18 @@
 import { Component, OnInit, inject } from "@angular/core";
 import { combineLatest, map } from "rxjs";
 
-import { MagazineService } from "../../data-access/magazine.service";
+import { MagazinesService } from "../data-access/magazines.service";
 import {
   MagazineId,
   MagazineIssueId,
   MagazineIssueObject,
   MagazineObject,
-} from "../../data-access/magazine";
+} from "../data-access/magazine";
 import { MatDialog } from "@angular/material/dialog";
 import { IssueDetailsComponent } from "./issue-details.component";
 
 @Component({
-  selector: "fo-magazine-checklist",
+  selector: "fo-magazines-list",
   template: `<ng-container *ngIf="vm$ | async as vm">
     <ul class="p-4">
       <li class="mb-2" *ngFor="let magazine of vm.magazines">
@@ -27,8 +27,8 @@ import { IssueDetailsComponent } from "./issue-details.component";
   </ng-container>`,
   styles: [],
 })
-export class MagazineChecklistComponent implements OnInit {
-  private magazineService = inject(MagazineService);
+export class MagazinesListComponent implements OnInit {
+  private magazineService = inject(MagazinesService);
   private dialog = inject(MatDialog);
 
   vm$ = combineLatest({

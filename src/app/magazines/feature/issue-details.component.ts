@@ -1,8 +1,5 @@
 import { Component, Inject, Input } from "@angular/core";
-import {
-  MagazineIssueObject,
-  MagazineObject,
-} from "../../data-access/magazine";
+import { MagazineIssueObject, MagazineObject } from "../data-access/magazine";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 interface DialogData {
