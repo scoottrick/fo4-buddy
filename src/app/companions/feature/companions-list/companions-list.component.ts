@@ -5,9 +5,6 @@ import { CompanionService } from "src/app/checklists/data-access/companion.servi
 
 @Component({
   selector: "fo-companions-list",
-  standalone: true,
-  imports: [CommonModule, SharedModule],
-  providers: [CompanionService],
   templateUrl: "./companions-list.component.html",
   styles: ``,
 })

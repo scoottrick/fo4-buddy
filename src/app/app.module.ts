@@ -12,6 +12,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { CollectionsModule } from "./collections/collections.module";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { MagazinesModule } from "./magazines/magazines.module";
+import { CompanionsModule } from "./companions/companions.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +21,7 @@ import { MagazinesModule } from "./magazines/magazines.module";
     AppRoutingModule,
     HackingModule,
     MagazinesModule,
+    CompanionsModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule,
