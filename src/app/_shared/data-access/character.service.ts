@@ -1,4 +1,4 @@
-import { Injectable, signal } from "@angular/core";
+import { Injectable, computed, signal } from "@angular/core";
 
 type MagazineCollection = Map<number, Set<number>>;
 type BobbleheadCollection = Set<number>;
@@ -22,18 +22,32 @@ const ACTIVE_CHARACTER_PREFIX = "fo-active-character";
 
 @Injectable({ providedIn: "root" })
 export class CharacterService {
+  private activeCharacter = signal<CharacterInfo | undefined>(undefined);
   private characterList = signal<CharacterInfo[]>([]);
 
   public getCharacterList() {
     return this.characterList.asReadonly();
   }
 
+  public getActiveCharacter() {
+    return this.activeCharacter.asReadonly();
+  }
+
   public loadSavedData() {
+    let activeCharacterName = this.loadActiveCharacter();
     let characters = this.loadCharacters();
     if (!characters.length) {
-      characters = [this.createFreshCharacter()];
+      const newCharacter = this.createFreshCharacter();
+      this.saveCharacterData(newCharacter);
+      characters = [newCharacter];
+    }
+    let activeCharacter = characters.find((c) => c.name == activeCharacterName);
+    if (!activeCharacter) {
+      activeCharacter = characters[0];
+      this.saveActiveCharacter(activeCharacter);
     }
     this.characterList.set(characters);
+    this.activeCharacter.set(activeCharacter);
   }
 
   private createFreshCharacter(): CharacterInfo {
@@ -62,6 +76,16 @@ export class CharacterService {
     return characters;
   }
 
+  private loadActiveCharacter() {
+    const key = this.getStorageKeyForActiveCharacter();
+    return localStorage.getItem(key) || undefined;
+  }
+
+  private saveActiveCharacter(character: CharacterInfo) {
+    const key = this.getStorageKeyForActiveCharacter();
+    localStorage.setItem(key, character.name);
+  }
+
   private saveCharacterData(character: CharacterInfo) {
     const key = this.getStorageKeyForCharacter(character);
     localStorage.setItem(key, this.serializeCharacterData(character));
@@ -74,6 +98,10 @@ export class CharacterService {
 
   private getStorageKeyForCharacter(character: CharacterInfo): string {
     return `${CHARACTER_PREFIX}${character.name}`;
+  }
+
+  private getStorageKeyForActiveCharacter(): string {
+    return ACTIVE_CHARACTER_PREFIX;
   }
 
   private serializeCharacterData(character: CharacterInfo): string {
@@ -104,6 +132,9 @@ export class CharacterService {
     collectionStr: string
   ): BobbleheadCollection {
     const collection = new Set() as BobbleheadCollection;
+    if (!collectionStr.length) {
+      return collection;
+    }
     for (const str of collectionStr.split(",")) {
       collection.add(parseInt(str));
     }
@@ -118,6 +149,9 @@ export class CharacterService {
 
   private parseMagazineCollection(collectionStr: string): MagazineCollection {
     const collection = new Map() as MagazineCollection;
+    if (!collectionStr.length) {
+      return collection;
+    }
     for (const magazineData of collectionStr.split(";")) {
       const issuesCollected = new Set<number>();
       const [magId, issueIds] = magazineData.split(":");
