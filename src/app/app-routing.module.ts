@@ -6,12 +6,18 @@ import { CollectionsShellComponent } from "./collections/feature/collections-she
 import { CompanionsListComponent } from "./companions/feature/companions-list/companions-list.component";
 import { MagazinesListComponent } from "./magazines/feature/magazines-list.component";
 import { BobbleheadsListComponent } from "./bobbleheads/feature/bobbleheads-list.component";
+import { CharactersPageComponent } from "./characters/characters-page/characters-page.component";
 
 const routes: Routes = [
   {
     path: "hacking",
     title: "Terminal Hacking",
     component: TerminalHackingComponent,
+  },
+  {
+    path: "characters",
+    title: "Characters",
+    component: CharactersPageComponent,
   },
   {
     path: "collections",
