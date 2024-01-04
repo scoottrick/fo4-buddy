@@ -50,9 +50,9 @@ export class CharacterService {
     this.activeCharacter.set(activeCharacter);
   }
 
-  private createFreshCharacter(): CharacterInfo {
+  private createFreshCharacter(name = "Default Character"): CharacterInfo {
     return {
-      name: "Default Character",
+      name,
       collectables: {
         bobbleheads: new Set(),
         magazines: new Map(),
