@@ -3,7 +3,7 @@ import {
   MagazineIssueId,
   MagazineIssueObject,
   MagazineObject,
-} from "../../data-access/magazine";
+} from "../data-access/magazine";
 
 @Component({
   selector: "fo-magazine-list-item",

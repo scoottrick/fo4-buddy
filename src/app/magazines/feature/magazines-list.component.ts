@@ -1,24 +1,24 @@
-import { Component, OnInit, inject } from "@angular/core";
+import { Component, OnInit, computed, inject } from "@angular/core";
 import { combineLatest, map } from "rxjs";
 
-import { MagazineService } from "../../data-access/magazine.service";
+import { MagazinesService } from "../data-access/magazines.service";
 import {
   MagazineId,
   MagazineIssueId,
   MagazineIssueObject,
   MagazineObject,
-} from "../../data-access/magazine";
+} from "../data-access/magazine";
 import { MatDialog } from "@angular/material/dialog";
 import { IssueDetailsComponent } from "./issue-details.component";
 
 @Component({
-  selector: "fo-magazine-checklist",
-  template: `<ng-container *ngIf="vm$ | async as vm">
-    <ul class="p-4">
-      <li class="mb-2" *ngFor="let magazine of vm.magazines">
+  selector: "fo-magazines-list",
+  template: `<ng-container *ngIf="magazines().length">
+    <ul>
+      <li class="mb-2 last:mb-0" *ngFor="let magazine of magazines()">
         <fo-magazine-list-item
           [magazine]="magazine"
-          [collectedIssues]="vm.magazineCollection.get(magazine.id)"
+          [collectedIssues]="collection().get(magazine.id)"
           (toggleCollectedIssue)="toggleMagazineIssue(magazine.id, $event)"
           (showIssueDetails)="showIssueDialog(magazine, $event.issue)"
         ></fo-magazine-list-item>
@@ -27,21 +27,20 @@ import { IssueDetailsComponent } from "./issue-details.component";
   </ng-container>`,
   styles: [],
 })
-export class MagazineChecklistComponent implements OnInit {
-  private magazineService = inject(MagazineService);
+export class MagazinesListComponent implements OnInit {
+  private magazineService = inject(MagazinesService);
   private dialog = inject(MatDialog);
 
-  vm$ = combineLatest({
-    magazines: this.magazineService.magazines$.pipe(
-      map((magazineData) => {
-        const sorted = magazineData.sort((a, b) =>
-          a.title.localeCompare(b.title)
-        );
-        return sorted;
-      })
-    ),
-    magazineCollection: this.magazineService.magazineCollection$,
+  magazines = computed(() => {
+    const list = this.magazineService.getList();
+    return this.sortMagazines(list());
   });
+  collection = this.magazineService.getCollection();
+
+  private sortMagazines(magazines: MagazineObject[]) {
+    magazines.sort((a, b) => a.title.localeCompare(b.title));
+    return magazines;
+  }
 
   ngOnInit(): void {
     this.magazineService.fetchData();

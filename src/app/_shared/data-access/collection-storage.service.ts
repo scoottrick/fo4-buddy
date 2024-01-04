@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
-import { BobbleheadId } from "src/app/checklists/data-access/bobblehead";
+import { BobbleheadId } from "src/app/bobbleheads/data-access/bobblehead";
 import {
   MagazineId,
   MagazineIssueId,
-} from "src/app/checklists/data-access/magazine";
+} from "src/app/magazines/data-access/magazine";
 
 const bobbleheadTag = "fo:bobbles:";
 const magazineTag = "fo:mags:";
@@ -18,11 +18,12 @@ type BobbleheadStorageObject = BobbleheadId[];
   providedIn: "root",
 })
 export class CollectionStorageService {
-  loadCollections() {
-    return {
-      bobbleheads: this.loadBobbleheadCollection(),
-      magazines: this.loadMagazineCollection(),
-    };
+  loadMagazines() {
+    return this.loadMagazineCollection();
+  }
+
+  loadBobbleheads() {
+    return this.loadBobbleheadCollection();
   }
 
   updateBobbleheads(bobbleheads: BobbleheadCollection) {

@@ -24,7 +24,7 @@ export class StatItemComponent {
 @Component({
   selector: "fo-bobblehead-collection-stats",
   template: ` <ng-container>
-    <div class="p-4 flex flex-row justify-evenly">
+    <div class="py-4 flex flex-row justify-evenly">
       <fo-stat-item label="Total" [value]="total"></fo-stat-item>
       <fo-stat-item label="Collected" [value]="collected"></fo-stat-item>
       <fo-stat-item
